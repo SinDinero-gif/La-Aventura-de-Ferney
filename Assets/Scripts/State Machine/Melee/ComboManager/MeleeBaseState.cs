@@ -17,7 +17,7 @@ namespace State_Machine.Melee.ComboManager
         public override void OnEnter(StateMachine _stateMachine)
         {
             base.OnEnter(_stateMachine);
-            Animator = GetComponent<Animator>();
+            Animator = _stateMachine.GetComponent<Animator>();
         }
 
         public override void OnUpdate()

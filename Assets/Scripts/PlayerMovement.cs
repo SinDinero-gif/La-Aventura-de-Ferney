@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        playerAnimator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
     }
     
@@ -43,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !_isAttacking)
         {
             _isAttacking = true;
-            playerAnimator.SetTrigger(""+comboCounter);
+            playerAnimator.SetInteger("Punch", comboCounter);
         }
     }
 
