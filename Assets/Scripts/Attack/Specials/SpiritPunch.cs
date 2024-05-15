@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundFinisherState : MonoBehaviour
+public class SpiritPunch : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
