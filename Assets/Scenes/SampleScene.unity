@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 33069905}
   - component: {fileID: 33069904}
   - component: {fileID: 33069907}
+  - component: {fileID: 33069908}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -267,8 +268,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.31691742}
-  m_Center: {x: 0, y: 0.5, z: -0.07281559}
+  m_Size: {x: 1, y: 1, z: 0.3068456}
+  m_Center: {x: 0, y: 0.5, z: 0.14275393}
 --- !u!54 &33069905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -311,6 +312,7 @@ Transform:
   m_Children:
   - {fileID: 1275059010}
   - {fileID: 330585546}
+  - {fileID: 86395657}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &33069907
@@ -326,6 +328,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 1275059012}
+--- !u!114 &33069908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33069903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332761dfbb2e4e14fbe40d77481b2fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 5
+  attackPoint: {fileID: 86395657}
+  attackRange: 0.3
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 448
+  _playerAnimator: {fileID: 1275059012}
+--- !u!1 &86395656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 86395657}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &86395657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86395656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.552, y: 0.45, z: 0.164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 33069906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &262551448
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +507,17 @@ PrefabInstance:
     - target: {fileID: 3099864523147231976, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (2)
+      value: Cockroach
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099864523147231976, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483693620608084347, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -660,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 3099864523147231976, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (3)
+      value: Rat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -846,7 +908,17 @@ PrefabInstance:
     - target: {fileID: 3099864523147231976, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (1)
+      value: Cockroach
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099864523147231976, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483693620608084347, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1348,7 +1420,7 @@ PrefabInstance:
     - target: {fileID: 1226757908934130636, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.18
+      value: 2.737
       objectReference: {fileID: 0}
     - target: {fileID: 1226757908934130636, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
         type: 3}
@@ -1398,7 +1470,7 @@ PrefabInstance:
     - target: {fileID: 3099864523147231976, guid: 23d05a3d6f3ce4e1d9ae7a9287822cf5,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Rat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
