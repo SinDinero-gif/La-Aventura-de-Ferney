@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IEntity
     private int _currentHealth;
 
     private bool _isAlive = true;
+    private bool _tookDamage = false;
     
 
     [Header("UI")]
@@ -30,13 +31,43 @@ public class Enemy : MonoBehaviour, IEntity
     void Update()
     {
         _healthBar.fillAmount = _currentHealth * 0.01f;
-   
-        
+
+        if (_tookDamage)
+        {
+
+            StartCoroutine(DamageAnim());
+
+        }
+
+        if (_isAlive == false)
+        {
+            _tookDamage = false;
+
+            //Death Animation
+            _animator.SetTrigger("Die");
+            
+
+            //Disable the Enemy
+            StartCoroutine(EnemyDeath());
+
+        }
+    }
+
+    private IEnumerator DamageAnim()
+    {
+        _animator.SetTrigger("Damage");
+
+        yield return new WaitForSeconds(0.1f);
+
+        _tookDamage = false;
     }
 
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
+        _tookDamage = true;
+
+       
 
         if (_currentHealth <= 0) 
         {
@@ -50,19 +81,12 @@ public class Enemy : MonoBehaviour, IEntity
     public void Die()
     {
         _isAlive = false;
+        
 
         Debug.Log("The Enemy is Dead");
 
         
-        if (_isAlive == false)
-        {
-            //Death Animation
-           _animator.SetTrigger("Die");
-
-            //Disable the Enemy
-            StartCoroutine(EnemyDeath());
-
-        }
+        
 
         
 
