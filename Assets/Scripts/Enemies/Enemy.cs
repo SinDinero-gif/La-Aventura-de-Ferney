@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour, ITakeDamage, IDead
+public class Enemy : IEntity
 {
     private int _maxHealth = 100;
     private int _currentHealth;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IDead
         _healthbar.fillAmount = _currentHealth * 0.01f;
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         _currentHealth -= damage;
 
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IDead
 
     }
 
-    public void Die()
+    public override void Die()
     {
         Debug.Log("The Enemy is Dead");
 
