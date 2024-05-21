@@ -10,15 +10,18 @@ public class Jab : MonoBehaviour, IAttack
 
     [SerializeField]
     private Transform attackPoint;
+
     [SerializeField]
     private float attackRange;
     public LayerMask enemyLayers;
 
     [SerializeField]
     private Animator _playerAnimator;
+     
 
     private void Update()
-    {
+    {      
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             Attack();
@@ -30,21 +33,24 @@ public class Jab : MonoBehaviour, IAttack
         _playerAnimator.SetTrigger("Attack1"); 
 
 
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
-
-        foreach (Collider enemy in hitEnemies)
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);        
+        
+        foreach (Collider enemy in hitEnemiesR)
         {
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
             Debug.Log("The " + enemy.name + " was hit, dealing " + attackDamage + " of Damage.");
         }
+        
+       
     }
 
     private void OnDrawGizmosSelected()
     {
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(attackPoint.position, attackRange);
-
+        
+        
         
     }
 

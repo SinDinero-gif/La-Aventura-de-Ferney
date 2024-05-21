@@ -10,15 +10,21 @@ public class PlayerMovement : MonoBehaviour
     private float _hInput;
     private float _vInput;
 
+    [SerializeField] private SpriteRenderer _playerSprite;
+
     private Rigidbody _rb;
     
-    [SerializeField] private Animator playerAnimator;
+    //[SerializeField] private Animator playerAnimator;
     private int comboCounter;
     private bool _isAttacking;
+
+    private bool _isFlipped;
+    public static bool staticFlip;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _isFlipped = false;
     }
     
     public void ComboStart()
@@ -42,17 +48,37 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !_isAttacking)
         {
             _isAttacking = true;
-            playerAnimator.SetInteger("Punch", comboCounter);
+           // playerAnimator.SetInteger("Punch", comboCounter);
         }
     }
 
     void Update()
     {
+        _isFlipped = staticFlip;
+
         _hInput = Input.GetAxis("Horizontal");
         _vInput = Input.GetAxis("Vertical");
 
         Move();
         Combos();
+        FLip();
+
+
+    }
+
+    private void FLip()
+    {
+        if (_hInput < 0)
+        {
+            _playerSprite.flipX = true;
+            _isFlipped = true;
+
+        }
+        else if (_hInput > 0)
+        {
+            _playerSprite.flipX = false;
+            _isFlipped = false;
+        }
     }
 
     private void Move()

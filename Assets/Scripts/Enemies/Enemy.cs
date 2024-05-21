@@ -1,47 +1,78 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : IEntity
+public class Enemy : MonoBehaviour, IEntity
 {
     private int _maxHealth = 100;
     private int _currentHealth;
 
+    private bool _isAlive = true;
+    
+
     [Header("UI")]
-    [SerializeField] Image _healthbar;
+    [SerializeField] GameObject _healthCanvas;
+    [SerializeField] Image _healthBar;
+
+    [Header("Animation")]
+    [SerializeField] Animator _animator;
 
     // Start is called before the first frame update
     void Start()
     {
         _currentHealth = _maxHealth;
 
-        _healthbar.fillAmount = _currentHealth * 0.01f;
+        _healthBar.fillAmount = _currentHealth * 0.01f;
     }
 
     void Update()
     {
-        _healthbar.fillAmount = _currentHealth * 0.01f;
+        _healthBar.fillAmount = _currentHealth * 0.01f;
+   
+        
     }
 
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
 
         if (_currentHealth <= 0) 
         {
             Die();
+            
+            
         }
 
     }
 
-    public override void Die()
+    public void Die()
     {
+        _isAlive = false;
+
         Debug.Log("The Enemy is Dead");
 
-        //Death Animation
+        
+        if (_isAlive == false)
+        {
+            //Death Animation
+           _animator.SetTrigger("Die");
 
-        //Disable the Enemy
+            //Disable the Enemy
+            StartCoroutine(EnemyDeath());
+
+        }
+
+        
+
     }
 
+    public IEnumerator EnemyDeath()
+    {
+
+        yield return new WaitForSeconds(1.5f);
+
+        Destroy(gameObject);
+    }
 }
