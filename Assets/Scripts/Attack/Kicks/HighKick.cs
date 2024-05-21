@@ -13,7 +13,7 @@ public class HighKick : MonoBehaviour,IAttack
 
     private void Start()
     {
-        float lastKick = -kickCold;
+         lastKick = -kickCold;
     }
 
 
