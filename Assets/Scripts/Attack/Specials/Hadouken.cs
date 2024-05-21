@@ -7,7 +7,7 @@ using UnityEngine;
 public class Hadouken : MonoBehaviour,IAttack
 {
    [SerializeField] private float maxRange;
-   private float cooldownTime = 10f;
+   private float cooldownTime = 3f;
    private float lastAtack;
    [SerializeField] private int AttackDamage;
    private RaycastHit[] hits;
@@ -15,7 +15,7 @@ public class Hadouken : MonoBehaviour,IAttack
 
    public void Start()
    {
-       float lastAtack = -cooldownTime;
+        lastAtack = -cooldownTime;
    }
 
    public void Update()
@@ -36,13 +36,14 @@ public class Hadouken : MonoBehaviour,IAttack
 
    public void Atack()
    {
-     Ray ray = new Ray(transform.position, transform.forward);
-     hits = Physics.RaycastAll(ray);
-     foreach (RaycastHit hit in hits)
-     {
-         hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-         hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(AttackDamage);
-     }
+       Ray ray = new Ray(transform.position, transform.forward);
+       hits = Physics.RaycastAll(ray, maxRange); 
+       Debug.DrawRay(ray.origin, ray.direction * maxRange, Color.red);
 
+       foreach (RaycastHit hit in hits)
+       {
+           hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+       }
    }
+
 }
