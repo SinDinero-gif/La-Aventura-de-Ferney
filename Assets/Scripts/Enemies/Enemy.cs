@@ -6,12 +6,17 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
+    [Header("Health")]
     private int _maxHealth = 100;
     private int _currentHealth;
 
     private bool _isAlive = true;
     private bool _tookDamage = false;
-    
+
+    [Header("SpriteManagement")]
+
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private SpriteRenderer _enemySprite;
 
     [Header("UI")]
     [SerializeField] GameObject _healthCanvas;
@@ -42,6 +47,7 @@ public class Enemy : MonoBehaviour, IEntity
         if (_isAlive == false)
         {
             _tookDamage = false;
+            _animator.SetBool("Damaged", false);
 
             //Death Animation
             _animator.SetTrigger("Die");
@@ -51,14 +57,26 @@ public class Enemy : MonoBehaviour, IEntity
             StartCoroutine(EnemyDeath());
 
         }
+
+        FlipSprite();
+
+    }
+
+    private void FlipSprite()
+    {
+        Vector3 directionToPlayer = _playerTransform.position - transform.position;
+
+        _enemySprite.flipX = directionToPlayer.x < 0;
+
     }
 
     private IEnumerator DamageAnim()
     {
-        _animator.SetTrigger("Damage");
+        _animator.SetBool("Damaged", true);
 
         yield return new WaitForSeconds(0.1f);
 
+        _animator.SetBool("Damaged", false);
         _tookDamage = false;
     }
 
