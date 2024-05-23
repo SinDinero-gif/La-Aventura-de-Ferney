@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 16f249165e21c0848b624d0e1daf95fc
+guid: 725704c363da6114b9574cef2eeb8e44
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BackGround_Parallax_3.001
-    second: {fileID: 2100000, guid: 0c1a82795e3302c48ac70c0877140d63, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Lit.001
-    second: {fileID: 2100000, guid: ac1e55bbae983f044856af6dfa5cfde7, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
