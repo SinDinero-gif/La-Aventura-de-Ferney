@@ -60,6 +60,9 @@ public class Enemy : MonoBehaviour, IEntity
 
         FlipSprite();
 
+       
+
+
     }
 
     private void FlipSprite()

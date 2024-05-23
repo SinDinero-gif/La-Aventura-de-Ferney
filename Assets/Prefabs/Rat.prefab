@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3414089402302168929}
   - component: {fileID: 6403388580189163970}
   - component: {fileID: 1581440105762020557}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: CurrentHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7700cc2aec98cbc43979e7e65f16b317, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 7876262875837092053}
   - component: {fileID: 2596743814424023672}
   - component: {fileID: 3091328638732512757}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: HealthBarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4660220214541838816}
   - component: {fileID: 7436734022062054826}
   - component: {fileID: 3022322022511251050}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: MaxHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806902290294210253}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: HealhBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 7292932179653963856}
   - component: {fileID: 5051413148171652181}
   - component: {fileID: 7991126762953923151}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: BaseBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

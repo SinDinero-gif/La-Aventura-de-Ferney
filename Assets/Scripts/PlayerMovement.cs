@@ -6,9 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    private float _moveSpeed = 2f;
+    private float _moveSpeed = 4f;
+    private float _jumpForce = 6f;
     private float _hInput;
     private float _vInput;
+
+    private bool _isGrounded;
 
     [SerializeField] private SpriteRenderer _playerSprite;
 
@@ -17,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private Animator playerAnimator;
     private int comboCounter;
     private bool _isAttacking;
-
+    
+   
     private bool _isFlipped;
     public static bool staticFlip;
 
@@ -54,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         _isFlipped = staticFlip;
 
         _hInput = Input.GetAxis("Horizontal");
@@ -63,7 +68,28 @@ public class PlayerMovement : MonoBehaviour
         Combos();
         FLip();
 
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        {
+            Jump();
+        }
 
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = true;
+        }
+    }
+
+    private void Jump()
+    {
+        
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _isGrounded = false;
+ 
     }
 
     private void FLip()
