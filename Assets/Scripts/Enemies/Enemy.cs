@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,11 +8,15 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour, IEntity
 {
     [Header("Health")]
-    private int _maxHealth = 100;
-    private int _currentHealth;
+    private float _maxHealth = 100.0f;
+    private float _currentHealth;
 
     private bool _isAlive = true;
     private bool _tookDamage = false;
+
+    private float _fillSpeed = 0.42f;
+    [SerializeField] 
+    private Gradient _colorGradient;
 
     [Header("SpriteManagement")]
 
@@ -24,24 +29,27 @@ public class Enemy : MonoBehaviour, IEntity
 
     [Header("Animation")]
     [SerializeField] Animator _animator;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         _currentHealth = _maxHealth;
-
-        _healthBar.fillAmount = _currentHealth * 0.01f;
+        _healthBar.fillAmount = _currentHealth / _maxHealth;
     }
 
     void Update()
     {
-        _healthBar.fillAmount = _currentHealth * 0.01f;
+       
+        
+        
 
+        
         if (_tookDamage)
         {
 
             StartCoroutine(DamageAnim());
-
+            
         }
 
         if (_isAlive == false)
@@ -64,6 +72,8 @@ public class Enemy : MonoBehaviour, IEntity
 
 
     }
+
+   
 
     private void FlipSprite()
     {
@@ -88,13 +98,15 @@ public class Enemy : MonoBehaviour, IEntity
         _currentHealth -= damage;
         _tookDamage = true;
 
-       
+        float targetFillAmount = _currentHealth / _maxHealth;
+        _healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
+        _healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
+
 
         if (_currentHealth <= 0) 
         {
             Die();
-            
-            
+                     
         }
 
     }
@@ -105,7 +117,6 @@ public class Enemy : MonoBehaviour, IEntity
         
 
         Debug.Log("The Enemy is Dead");
-
         
         
 

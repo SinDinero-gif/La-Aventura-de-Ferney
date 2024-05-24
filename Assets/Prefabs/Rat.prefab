@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3414089402302168929}
   - component: {fileID: 6403388580189163970}
   - component: {fileID: 1581440105762020557}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: CurrentHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,13 +101,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841500953341133793}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3119256, y: -0, z: -0, w: 0.9501066}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.16603303, y: -0, z: -0, w: 0.9861202}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0.018}
   m_LocalScale: {x: 5.5599456, y: 5.5599456, z: 5.5599456}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 433856548914686127}
-  m_LocalEulerAnglesHint: {x: 36.351, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 19.115, y: 0, z: 0}
 --- !u!212 &6661845181732802177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 7876262875837092053}
   - component: {fileID: 2596743814424023672}
   - component: {fileID: 3091328638732512757}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: HealthBarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4660220214541838816}
   - component: {fileID: 7436734022062054826}
   - component: {fileID: 3022322022511251050}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: MaxHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,6 +456,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1809b3d17649024c8505b0e7840f7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorGradient:
+    serializedVersion: 2
+    key0: {r: 0.31132078, g: 0.22467962, b: 0.22467962, a: 1}
+    key1: {r: 0.8113208, g: 0.53887033, b: 0.3023318, a: 1}
+    key2: {r: 1, g: 0.5126301, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 17733
+    ctime1: 42598
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
   _playerTransform: {fileID: 0}
   _enemySprite: {fileID: 6661845181732802177}
   _healthCanvas: {fileID: 2136362200329521129}
@@ -470,7 +500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806902290294210253}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: HealhBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +540,7 @@ GameObject:
   - component: {fileID: 7292932179653963856}
   - component: {fileID: 5051413148171652181}
   - component: {fileID: 7991126762953923151}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BaseBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

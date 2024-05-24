@@ -6,7 +6,9 @@ using UnityEngine;
 public class Jab : MonoBehaviour, IAttack
 {
     
-    public int attackDamage = 10;
+    private int attackDamage = 10;
+
+    private bool canAttack = true;
 
     [SerializeField]
     private Transform attackPoint;
@@ -22,25 +24,31 @@ public class Jab : MonoBehaviour, IAttack
     private void Update()
     {      
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canAttack)
         {
-            Attack();
+            StartCoroutine(Attack());
         }
     }
 
-    public void Attack()
+    public IEnumerator Attack()
     {
+        canAttack = false;
         _playerAnimator.SetTrigger("Attack1"); 
 
+        yield return new WaitForSeconds(0.23f);
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);        
         
         foreach (Collider enemy in hitEnemiesR)
         {
+            
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
             Debug.Log("The " + enemy.name + " was hit, dealing " + attackDamage + " of Damage.");
         }
+
+        yield return new WaitForSeconds(0.17f);
         
+        canAttack = true;
        
     }
 
