@@ -2,25 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Attack", menuName = "ScriptableObjects/Entities", order = 1)]
+[CreateAssetMenu(fileName = "Entity", menuName = "DataBlocks/Entities", order = 1)]
 public class EntityData : ScriptableObject
 {
-    public string Id;
+    [SerializeField]
+    private int _id;
 
-    public float attackDamage;
+    [SerializeField]
+    private string _name;
 
-    public float attackRadius;
+    [SerializeField]
+    private int _attackDamage;
 
-    public float attackSpeed;
+    [SerializeField]
+    private float _attackRadius;
+
+    [SerializeField]
+    private bool _canAttack;
+
+    [SerializeField] 
+    private int _maxHealth;
+
+    [SerializeField]
+    private int _currentHealth;
+
+    public int Id
+    {
+        get => _id;
+        set => _id = value;
+        
+    }
+
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
+
+    public int AttackDamage
+    {
+        get => _attackDamage;
+        set
+        {   
+            if (_attackDamage > 50) { _attackDamage = 50; }
+            else _attackDamage = value;
+        }
+    }
+
+    public float AttackRadius
+    {
+        get => _attackRadius;
+        set { _attackRadius = value; }
+    }
 
     public LayerMask enemyLayers;
 
-    public bool canAttack;
+    public bool CanAttack
+    {
+        get => _canAttack;
+        set { _canAttack = value; }
+    }
 
-    private int _maxHealth;
+    public int MaxHealth
+    {
+        get => _maxHealth;
+        set { _maxHealth = value; }
+    }
 
-    public int _currentHealth;
-
-    public Animator _animator;
-
+    public int CurrentHealth
+    {
+        get => _currentHealth;
+        set { _currentHealth = value; }
+    }
 }

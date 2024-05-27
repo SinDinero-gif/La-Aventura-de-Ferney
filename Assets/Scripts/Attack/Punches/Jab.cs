@@ -5,26 +5,20 @@ using UnityEngine;
 
 public class Jab : MonoBehaviour, IAttack
 {
-    
-    private int attackDamage = 10;
+    public EntityData _entityData;
 
-    private bool canAttack = true;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] Animator animator;
 
-    [SerializeField]
-    private Transform attackPoint;
-
-    [SerializeField]
-    private float attackRange;
-    public LayerMask enemyLayers;
-
-    [SerializeField]
-    private Animator _playerAnimator;
-     
+    private void Start()
+    {
+        _entityData.CanAttack = true;
+    }
 
     private void Update()
     {      
 
-        if (Input.GetKeyDown(KeyCode.E) && canAttack)
+        if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack)
         {
             StartCoroutine(Attack());
         }
@@ -32,23 +26,23 @@ public class Jab : MonoBehaviour, IAttack
 
     public IEnumerator Attack()
     {
-        canAttack = false;
-        _playerAnimator.SetTrigger("Attack1"); 
+        _entityData.CanAttack = false;
+        animator.SetTrigger("Attack1"); 
 
         yield return new WaitForSeconds(0.23f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);        
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);        
         
         foreach (Collider enemy in hitEnemiesR)
         {
             
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + attackDamage + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_entityData.AttackDamage);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.AttackDamage + " of Damage.");
         }
 
         yield return new WaitForSeconds(0.17f);
-        
-        canAttack = true;
+
+        _entityData.CanAttack = true;
        
     }
 
@@ -56,7 +50,7 @@ public class Jab : MonoBehaviour, IAttack
     {
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, attackRange);
+        Gizmos.DrawSphere(attackPoint.position, _entityData.AttackRadius);
         
         
         
