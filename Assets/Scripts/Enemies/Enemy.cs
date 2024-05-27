@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour, IEntity
 
    
 
-    private void FlipSprite()
+    public void FlipSprite()
     {
         Vector3 directionToPlayer = _playerTransform.position - transform.position;
 
