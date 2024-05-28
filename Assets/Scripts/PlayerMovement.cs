@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isAttacking;
     public Transform tf;
     
-    private NavMeshAgent _navMeshAgent;
 
     private bool _isFlipped;
     public static bool staticFlip;
@@ -32,10 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _isFlipped = false;
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
-        //_navMeshAgent.speed = _moveSpeed;
-        _navMeshAgent.SetDestination(tf.position);
+        
     }
     
     public void ComboStart()

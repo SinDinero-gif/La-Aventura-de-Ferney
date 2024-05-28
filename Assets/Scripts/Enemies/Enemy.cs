@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
 
         _data.CurrentHealth = _data.MaxHealth;
-        _healthBar.fillAmount = _data.CurrentHealth / _data.MaxHealth;
+        _healthBar.fillAmount = _data.CurrentHealth * 0.01f;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
@@ -157,7 +157,7 @@ public class Enemy : MonoBehaviour, IEntity
         _tookDamage = true;
 
 
-        float targetFillAmount = _data.CurrentHealth / _data.MaxHealth;
+        float targetFillAmount = _data.CurrentHealth * 0.01f;
         _healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
         _healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
 
