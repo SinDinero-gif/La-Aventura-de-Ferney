@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
-    [Header("Health")]
-    private float _maxHealth = 100.0f;
-    private float _currentHealth;
+    [Header("Data")]
+    [SerializeField] private EntityData _data;
 
+    [Header("Health")]
     private bool _isAlive = true;
     private bool _tookDamage = false;
 
@@ -38,9 +38,14 @@ public class Enemy : MonoBehaviour, IEntity
     
     void Start()
     {
+
         _enemySprite = GetComponent<SpriteRenderer>();
         //_currentHealth = _maxHealth;
         //_healthBar.fillAmount = _currentHealth / _maxHealth;
+
+        _data.CurrentHealth = _data.MaxHealth;
+        //_healthBar.fillAmount = _data.CurrentHealth / _data.MaxHealth;
+
     }
 
     void Update()
@@ -106,15 +111,21 @@ public class Enemy : MonoBehaviour, IEntity
 
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
+        _data.CurrentHealth -= damage;
         _tookDamage = true;
 
-        float targetFillAmount = _currentHealth / _maxHealth;
+
+        //float targetFillAmount = _currentHealth / _maxHealth;
+        //_healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
+        //_healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
+
+        float targetFillAmount = _data.CurrentHealth / _data.MaxHealth;
         //_healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
         //_healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
 
 
-        if (_currentHealth <= 0) 
+
+        if (_data.CurrentHealth <= 0) 
         {
             Die();
                      

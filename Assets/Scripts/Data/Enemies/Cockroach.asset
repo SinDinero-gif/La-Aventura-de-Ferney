@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432ac5d152162b04b876c34ff9191eb8, type: 3}
+  m_Name: Cockroach
+  m_EditorClassIdentifier: 
+  _id: 2
+  _name: "Malevolo Cucarach\xF3n"
+  _attackDamage: 33
+  _attackRadius: 0.7
+  _canAttack: 0
+  _maxHealth: 50
+  _currentHealth: 0
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512

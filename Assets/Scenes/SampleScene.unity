@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276807, g: 0.21589197, b: 0.29782572, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,12 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332761dfbb2e4e14fbe40d77481b2fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entityData: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
   attackPoint: {fileID: 86395657}
-  attackRange: 0.75
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 448
-  _playerAnimator: {fileID: 1275059012}
+  animator: {fileID: 1275059012}
 --- !u!136 &33069909
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -255,12 +252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095772efc7117d4e85403e6e5a109b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entityData: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
   attackPoint: {fileID: 86395657}
-  attackRange: 0.86
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 448
-  _playerAnimator: {fileID: 1275059012}
+  animator: {fileID: 1275059012}
 --- !u!1 &86395656
 GameObject:
   m_ObjectHideFlags: 0
@@ -5463,35 +5457,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4468958319125216695, guid: 2d6820053085702419493bf80e05fd44,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468958319125216695, guid: 2d6820053085702419493bf80e05fd44,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.4796099
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468958319125216695, guid: 2d6820053085702419493bf80e05fd44,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4730869049537731245, guid: 2d6820053085702419493bf80e05fd44,
         type: 3}
       propertyPath: m_Name
       value: Cockroach
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337303182081044538, guid: 2d6820053085702419493bf80e05fd44,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.045
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337303182081044538, guid: 2d6820053085702419493bf80e05fd44,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5555,21 +5524,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581440105762020557, guid: 72ca61fa22221384f978bcc935486415,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581440105762020557, guid: 72ca61fa22221384f978bcc935486415,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.4784314
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581440105762020557, guid: 72ca61fa22221384f978bcc935486415,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.9960785
       objectReference: {fileID: 0}
     - target: {fileID: 6312616147733570609, guid: 72ca61fa22221384f978bcc935486415,
         type: 3}

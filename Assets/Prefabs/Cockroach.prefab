@@ -317,7 +317,7 @@ Transform:
   m_GameObject: {fileID: 4049365217149850464}
   serializedVersion: 2
   m_LocalRotation: {x: 0.33512598, y: -0, z: -0, w: 0.94217336}
-  m_LocalPosition: {x: 0, y: -0.032, z: -0.113}
+  m_LocalPosition: {x: 0, y: 0.045, z: -0.05}
   m_LocalScale: {x: 4.3322, y: 4.3322, z: 4.3322}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -494,6 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1809b3d17649024c8505b0e7840f7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 645cf691bb6a9c54fb339787f7128c30, type: 2}
   _colorGradient:
     serializedVersion: 2
     key0: {r: 0.31132078, g: 0.22467962, b: 0.22467962, a: 1}
@@ -587,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.040144444, a: 1}
+  m_Color: {r: 1, g: 0.4796099, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
