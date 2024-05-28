@@ -14,15 +14,17 @@ public class iaState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("player").GetComponent<Transform>();
-        _enemy = animator.gameObject.GetComponent<Enemy>();
-        _enemy.FlipSprite();
+        _enemy = animator.GetComponent<Enemy>();
+        
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.transform.position = Vector3.MoveTowards(animator.transform.position, player.position, velocityEnemy * Time.deltaTime);
-        _enemy.FlipSprite();
+        _enemy.FlipSprite(player.position);
+      
     
     
     }

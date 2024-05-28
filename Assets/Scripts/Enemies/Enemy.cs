@@ -24,24 +24,30 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] private SpriteRenderer _enemySprite;
 
     [Header("UI")]
-    [SerializeField] GameObject _healthCanvas;
-    [SerializeField] Image _healthBar;
+    //[SerializeField] GameObject _healthCanvas;
+    //[SerializeField] Image _healthBar;
 
     [Header("Animation")]
     [SerializeField] Animator _animator;
-    
 
-    // Start is called before the first frame update
+    [SerializeField] private float Distance;
+    
+   
+   
+
+    
     void Start()
     {
-        _currentHealth = _maxHealth;
-        _healthBar.fillAmount = _currentHealth / _maxHealth;
+        _enemySprite = GetComponent<SpriteRenderer>();
+        //_currentHealth = _maxHealth;
+        //_healthBar.fillAmount = _currentHealth / _maxHealth;
     }
 
     void Update()
     {
-       
-        
+
+        Distance = Vector3.Distance(transform.position, _playerTransform.position);
+        _animator.SetFloat("Distance",Distance);
         
 
         
@@ -54,19 +60,19 @@ public class Enemy : MonoBehaviour, IEntity
 
         if (_isAlive == false)
         {
-            _tookDamage = false;
-            _animator.SetBool("Damaged", false);
+            //_tookDamage = false;
+            //_animator.SetBool("Damaged", false);
 
             //Death Animation
-            _animator.SetTrigger("Die");
+            //_animator.SetTrigger("Die");
             
 
             //Disable the Enemy
-            StartCoroutine(EnemyDeath());
+            //StartCoroutine(EnemyDeath());
 
         }
 
-        FlipSprite();
+        
 
        
 
@@ -75,13 +81,18 @@ public class Enemy : MonoBehaviour, IEntity
 
    
 
-    public void FlipSprite()
+    public void FlipSprite(Vector3 playerPosition)
     {
-        Vector3 directionToPlayer = _playerTransform.position - transform.position;
-
-        _enemySprite.flipX = directionToPlayer.x < 0;
-
+        if (transform.position.x < playerPosition.x)
+        {
+            _enemySprite.flipX = true;
+        }
+        else
+        {
+            _enemySprite.flipX = false;
+        }
     }
+
 
     private IEnumerator DamageAnim()
     {
@@ -99,8 +110,8 @@ public class Enemy : MonoBehaviour, IEntity
         _tookDamage = true;
 
         float targetFillAmount = _currentHealth / _maxHealth;
-        _healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
-        _healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
+        //_healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
+        //_healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
 
 
         if (_currentHealth <= 0) 

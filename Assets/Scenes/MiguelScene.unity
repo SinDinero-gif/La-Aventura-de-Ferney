@@ -40645,37 +40645,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292109794}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &300500295
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 300500296}
-  m_Layer: 0
-  m_Name: OBJETO
-  m_TagString: player
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &300500296
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300500295}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.1, y: 3.07, z: -6.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307062105
 GameObject:
   m_ObjectHideFlags: 0
@@ -40689,6 +40658,7 @@ GameObject:
   - component: {fileID: 307062108}
   - component: {fileID: 307062107}
   - component: {fileID: 307062106}
+  - component: {fileID: 307062112}
   - component: {fileID: 307062111}
   m_Layer: 0
   m_Name: Ratas_Place Holder_0
@@ -40820,7 +40790,7 @@ Transform:
   m_GameObject: {fileID: 307062105}
   serializedVersion: 2
   m_LocalRotation: {x: -0.029854324, y: 0.96933144, z: 0.19147949, w: -0.15113227}
-  m_LocalPosition: {x: 21.69, y: 0.63, z: -10.02}
+  m_LocalPosition: {x: 27.31, y: 1.31, z: -11.68}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40868,11 +40838,31 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  _playerTransform: {fileID: 0}
-  _enemySprite: {fileID: 0}
-  _healthCanvas: {fileID: 0}
-  _healthBar: {fileID: 0}
-  _animator: {fileID: 0}
+  _playerTransform: {fileID: 1187911447}
+  _enemySprite: {fileID: 307062109}
+  _animator: {fileID: 307062112}
+  Distance: 0
+--- !u!95 &307062112
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307062105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94255e23660374071b29d30fa2125f56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &371292548
 GameObject:
   m_ObjectHideFlags: 0
@@ -45374,7 +45364,7 @@ GameObject:
   - component: {fileID: 1187911448}
   m_Layer: 0
   m_Name: Ferney_3
-  m_TagString: Player
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45463,7 +45453,7 @@ Transform:
   m_GameObject: {fileID: 1187911443}
   serializedVersion: 2
   m_LocalRotation: {x: 0.28136763, y: -0, z: -0, w: 0.9596001}
-  m_LocalPosition: {x: 15.25, y: 0.282, z: -10.53}
+  m_LocalPosition: {x: 11.38, y: 0.282, z: -10.53}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52267,4 +52257,3 @@ SceneRoots:
   - {fileID: 1400128565}
   - {fileID: 506035007}
   - {fileID: 307062110}
-  - {fileID: 300500296}
