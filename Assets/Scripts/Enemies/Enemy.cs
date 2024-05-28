@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IEntity
@@ -18,20 +19,24 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] 
     private Gradient _colorGradient;
 
-    [Header("SpriteManagement")]
-
+    [Header("AI")]
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private float followDistance = 5f;
+    [SerializeField] private Transform attackPoint;
+
+    private NavMeshAgent navMeshAgent;
+
+    [Header("SpriteManagement")]  
     [SerializeField] private SpriteRenderer _enemySprite;
 
     [Header("UI")]
-    //[SerializeField] GameObject _healthCanvas;
-    //[SerializeField] Image _healthBar;
+    [SerializeField] GameObject _healthCanvas;
+    [SerializeField] Image _healthBar;
 
     [Header("Animation")]
     [SerializeField] Animator _animator;
 
     [SerializeField] private float Distance;
-    
    
    
 
@@ -39,12 +44,11 @@ public class Enemy : MonoBehaviour, IEntity
     void Start()
     {
 
-        _enemySprite = GetComponent<SpriteRenderer>();
-        //_currentHealth = _maxHealth;
-        //_healthBar.fillAmount = _currentHealth / _maxHealth;
-
         _data.CurrentHealth = _data.MaxHealth;
-        //_healthBar.fillAmount = _data.CurrentHealth / _data.MaxHealth;
+        _healthBar.fillAmount = _data.CurrentHealth / _data.MaxHealth;
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.updateRotation = false;
 
     }
 
@@ -53,8 +57,6 @@ public class Enemy : MonoBehaviour, IEntity
 
         Distance = Vector3.Distance(transform.position, _playerTransform.position);
         _animator.SetFloat("Distance",Distance);
-        
-
         
         if (_tookDamage)
         {
@@ -65,36 +67,76 @@ public class Enemy : MonoBehaviour, IEntity
 
         if (_isAlive == false)
         {
-            //_tookDamage = false;
-            //_animator.SetBool("Damaged", false);
+            _tookDamage = false;
+            _animator.SetBool("Damaged", false);
 
             //Death Animation
-            //_animator.SetTrigger("Die");
-            
+            _animator.SetTrigger("Die");
+
 
             //Disable the Enemy
-            //StartCoroutine(EnemyDeath());
+            StartCoroutine(EnemyDeath());
 
         }
 
-        
+        FlipSprite(_playerTransform.position);
 
-       
-
+        Movement();
 
     }
 
-   
+    public void Movement()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+
+        if (distanceToPlayer < followDistance) 
+        {
+            navMeshAgent.SetDestination(_playerTransform.position);
+
+            if (distanceToPlayer <= _data.AttackRadius)
+            {
+                StartCoroutine(Attack());
+                Debug.Log(_data.Name + " ataca a Ferney!");
+            }
+
+        } else
+        {
+            
+        }
+
+    }
+
+    public IEnumerator Attack()
+    {
+        _data.CanAttack = false;
+        _animator.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(0.36f);
+
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
+
+        foreach (Collider enemy in hitEnemiesR)
+        {
+
+            enemy.GetComponent<Enemy>().TakeDamage(_data.AttackDamage);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _data.AttackDamage + " of Damage.");
+        }
+
+        yield return new WaitForSeconds(0.17f);
+
+        _data.CanAttack = true;
+
+    }
 
     public void FlipSprite(Vector3 playerPosition)
     {
         if (transform.position.x < playerPosition.x)
         {
-            _enemySprite.flipX = true;
+            _enemySprite.flipX = false;
         }
         else
         {
-            _enemySprite.flipX = false;
+            _enemySprite.flipX = true;
         }
     }
 
@@ -103,7 +145,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
         _animator.SetBool("Damaged", true);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.24f);
 
         _animator.SetBool("Damaged", false);
         _tookDamage = false;
@@ -115,13 +157,9 @@ public class Enemy : MonoBehaviour, IEntity
         _tookDamage = true;
 
 
-        //float targetFillAmount = _currentHealth / _maxHealth;
-        //_healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
-        //_healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
-
         float targetFillAmount = _data.CurrentHealth / _data.MaxHealth;
-        //_healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
-        //_healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
+        _healthBar.DOFillAmount(targetFillAmount, _fillSpeed);
+        _healthBar.DOColor(_colorGradient.Evaluate(targetFillAmount), _fillSpeed);
 
 
 
@@ -138,7 +176,7 @@ public class Enemy : MonoBehaviour, IEntity
         _isAlive = false;
         
 
-        Debug.Log("The Enemy is Dead");
+        Debug.Log("The " + _data.Name + " is Dead");
         
         
 

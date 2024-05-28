@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -40808,6 +40808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1809b3d17649024c8505b0e7840f7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 0}
   _colorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -40839,6 +40840,8 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _playerTransform: {fileID: 1187911447}
+  followDistance: 5
+  attackPoint: {fileID: 0}
   _enemySprite: {fileID: 307062109}
   _animator: {fileID: 307062112}
   Distance: 0
@@ -45364,7 +45367,7 @@ GameObject:
   - component: {fileID: 1187911448}
   m_Layer: 0
   m_Name: Ferney_3
-  m_TagString: player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -20,8 +21,10 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private Animator playerAnimator;
     private int comboCounter;
     private bool _isAttacking;
+    public Transform tf;
     
-   
+    private NavMeshAgent _navMeshAgent;
+
     private bool _isFlipped;
     public static bool staticFlip;
 
@@ -29,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _isFlipped = false;
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        //_navMeshAgent.speed = _moveSpeed;
+        _navMeshAgent.SetDestination(tf.position);
     }
     
     public void ComboStart()
