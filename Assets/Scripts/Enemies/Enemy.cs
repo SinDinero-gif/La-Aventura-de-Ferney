@@ -45,11 +45,12 @@ public class Enemy : MonoBehaviour, IEntity
     {
 
         _data.CurrentHealth = _data.MaxHealth;
+        _data.CanAttack = true;
+        
         _healthBar.fillAmount = _data.CurrentHealth * 0.01f;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
-
     }
 
     void Update()
@@ -60,9 +61,7 @@ public class Enemy : MonoBehaviour, IEntity
         
         if (_tookDamage)
         {
-
             StartCoroutine(DamageAnim());
-            
         }
 
         if (_isAlive == false)
@@ -93,15 +92,12 @@ public class Enemy : MonoBehaviour, IEntity
         {
             navMeshAgent.SetDestination(_playerTransform.position);
 
-            if (distanceToPlayer <= _data.AttackRadius)
+            if (distanceToPlayer <= _data.AttackRadius & _data.CanAttack)
             {
                 StartCoroutine(Attack());
                 Debug.Log(_data.Name + " ataca a Ferney!");
             }
 
-        } else
-        {
-            
         }
 
     }
@@ -109,23 +105,24 @@ public class Enemy : MonoBehaviour, IEntity
     public IEnumerator Attack()
     {
         _data.CanAttack = false;
+        
         _animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(0.36f);
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
 
-        foreach (Collider enemy in hitEnemiesR)
+        foreach (Collider other in hitEnemiesR)
         {
-
-            enemy.GetComponent<Enemy>().TakeDamage(_data.AttackDamage);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _data.AttackDamage + " of Damage.");
+            if (other.TryGetComponent<Player.Player>(out Player.Player player))
+            {
+                player.TakeDamage(_data.AttackDamage);
+            }
         }
 
         yield return new WaitForSeconds(0.17f);
 
         _data.CanAttack = true;
-
     }
 
     public void FlipSprite(Vector3 playerPosition)

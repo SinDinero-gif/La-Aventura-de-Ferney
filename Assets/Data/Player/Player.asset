@@ -16,7 +16,7 @@ MonoBehaviour:
   _name: Ferney, el guapo poderoso
   _attackDamage: 15
   _attackRadius: 0.7
-  _canAttack: 0
+  _canAttack: 1
   _maxHealth: 100
   _currentHealth: 0
   enemyLayers:

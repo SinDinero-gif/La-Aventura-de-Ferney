@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 33069907}
   - component: {fileID: 33069908}
   - component: {fileID: 33069910}
+  - component: {fileID: 33069911}
   m_Layer: 9
   m_Name: Player
   m_TagString: player
@@ -256,6 +257,20 @@ MonoBehaviour:
   _entityData: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
   attackPoint: {fileID: 86395657}
   animator: {fileID: 1275059012}
+--- !u!114 &33069911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33069903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ccfc382ee44ec0a5cd2be9981fc42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
+  _playerSpriteRenderer: {fileID: 1275059011}
 --- !u!1 &86395656
 GameObject:
   m_ObjectHideFlags: 0
