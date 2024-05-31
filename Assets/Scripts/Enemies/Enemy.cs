@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour, IEntity
         _data.CurrentHealth = _data.MaxHealth;
         _data.CanAttack = true;
         
-        _healthBar.fillAmount = _data.CurrentHealth * 0.01f;
+        _healthBar.fillAmount = _data.CurrentHealth * _data.MaxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour, IEntity
 
         if (_isAlive == false)
         {
+            _data.CanAttack = false;
             _tookDamage = false;
             _animator.SetBool("Damaged", false);
 
@@ -99,6 +100,7 @@ public class Enemy : MonoBehaviour, IEntity
             }
 
         }
+        
 
     }
 
@@ -108,7 +110,7 @@ public class Enemy : MonoBehaviour, IEntity
         
         _animator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(0.36f);
+        yield return new WaitForSeconds(1f);
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
 
@@ -120,9 +122,10 @@ public class Enemy : MonoBehaviour, IEntity
             }
         }
 
-        yield return new WaitForSeconds(0.17f);
+        yield return new WaitForSeconds(1f);
 
         _data.CanAttack = true;
+        
     }
 
     public void FlipSprite(Vector3 playerPosition)
@@ -152,6 +155,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
         _data.CurrentHealth -= damage;
         _tookDamage = true;
+        _animator.SetTrigger("Attack");
 
 
         float targetFillAmount = _data.CurrentHealth * 0.01f;
