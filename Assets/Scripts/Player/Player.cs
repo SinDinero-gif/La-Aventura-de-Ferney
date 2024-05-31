@@ -31,6 +31,11 @@ namespace Player
         {
             _data.CurrentHealth -= damage;
             _tookDamage = true;
+            if (_data.CurrentHealth <= 0)
+            {
+               Die();
+               Debug.Log("The " + _data.Name + " is Dead");
+            }
         }
 
         public void Die()

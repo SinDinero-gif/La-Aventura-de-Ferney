@@ -16,7 +16,7 @@ MonoBehaviour:
   _name: Rata de Bolivar
   _attackDamage: 40
   _attackRadius: 1
-  _canAttack: 1
+  _canAttack: 0
   _maxHealth: 75
   _currentHealth: 75
   enemyLayers:
