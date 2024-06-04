@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _name: Ferney, el guapo poderoso
-  _attackDamage: 15
-  _attackRadius: 0.7
+  _punchDamage: 0
+  _kickDamage: 0
+  _attackArea: {x: 0, y: 0, z: 0}
   _canAttack: 1
   _maxHealth: 100
-  _currentHealth: -180
+  _currentHealth: 100
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 192

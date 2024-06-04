@@ -23,13 +23,13 @@ public class ObjectData : ScriptableObject
       set { description = value; }
    }
 
-   public int Damage
+   public int DamagePlus
    {
       get { return damage; }
       set { damage = value; }
    }
 
-   public int Health
+   public int HealthPlus
    {
       get { return health; }
       set { health = value; }

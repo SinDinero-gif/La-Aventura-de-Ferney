@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _name: Rata de Bolivar
-  _punchDamage: 0
+  _punchDamage: 15
   _kickDamage: 0
-  _attackRadius: 0.9
+  _attackArea: {x: 0, y: 0, z: 0}
   _canAttack: 0
   _maxHealth: 75
   _currentHealth: 75

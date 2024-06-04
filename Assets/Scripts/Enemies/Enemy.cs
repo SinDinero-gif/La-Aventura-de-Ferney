@@ -8,8 +8,10 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
+   
     [Header("Data")]
     [SerializeField] private EntityData _data;
+    [SerializeField] private EntityData _player;
 
     [Header("Health")]
     private bool _isAlive = true;
@@ -37,7 +39,6 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] Animator _animator;
 
     [SerializeField] private float Distance;
-   
    
 
     
@@ -96,7 +97,7 @@ public class Enemy : MonoBehaviour, IEntity
             if (distanceToPlayer <= 1f & _data.CanAttack)
             {
                 StartCoroutine(Attack());
-                Debug.Log(_data.Name + " ataca a Ferney!");
+                
             }
 
         }
@@ -106,6 +107,7 @@ public class Enemy : MonoBehaviour, IEntity
 
     public IEnumerator Attack()
     {
+        Debug.Log(_data.Name + " ataca a Ferney!");
         _data.CanAttack = false;
         
         _animator.SetTrigger("Attack");
@@ -114,12 +116,10 @@ public class Enemy : MonoBehaviour, IEntity
 
         Collider[] hitEnemiesR = Physics.OverlapBox(attackPoint.position, _data.AttackArea, Quaternion.identity.normalized, _data.enemyLayers);
 
-        foreach (Collider other in hitEnemiesR)
+        foreach (Collider player in hitEnemiesR)
         {
-            if (other.TryGetComponent<Player.Player>(out Player.Player player))
-            {
-                player.TakeDamage(_data.PunchDamage);
-            }
+            player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
+            Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de daño");
         }
 
         yield return new WaitForSeconds(1f);
