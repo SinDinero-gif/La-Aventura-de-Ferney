@@ -13,10 +13,13 @@ public class EntityData : ScriptableObject
     private string _name;
 
     [SerializeField]
-    private int _attackDamage;
+    private int _punchDamage;
+
+    [SerializeField] 
+    private int _kickDamage;
 
     [SerializeField]
-    private float _attackRadius;
+    private Vector3 _attackArea;
 
     [SerializeField]
     private bool _canAttack;
@@ -40,20 +43,30 @@ public class EntityData : ScriptableObject
         set { _name = value; }
     }
 
-    public int AttackDamage
+    public int PunchDamage
     {
-        get => _attackDamage;
+        get => _punchDamage;
         set
         {   
-            if (_attackDamage > 50) { _attackDamage = 50; }
-            else _attackDamage = value;
+            if (_punchDamage > 50) { _punchDamage = 50; }
+            else _punchDamage = value;
         }
     }
 
-    public float AttackRadius
+    public int KickDamage
     {
-        get => _attackRadius;
-        set { _attackRadius = value; }
+        get => _punchDamage;
+        set
+        {
+            if (_punchDamage > 80) { _punchDamage = 80; }
+            else _punchDamage = value;
+        }
+    }
+
+    public Vector3 AttackArea
+    {
+        get => _attackArea;
+        set {  _attackArea = value; }
     }
 
     public LayerMask enemyLayers;

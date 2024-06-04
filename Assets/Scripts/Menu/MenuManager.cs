@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Animator _menuUI;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] Animator _render;
+
+    [SerializeField] Animator _book;
+
+    public void MenuUpdate(int State)
     {
-        
+        _menuUI.SetInteger("State", State);
+        _render.SetInteger("State", State);
+        _book.SetInteger("State", State);
     }
+    
 }

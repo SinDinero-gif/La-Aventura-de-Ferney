@@ -8,7 +8,8 @@ public class Jab : MonoBehaviour, IAttack
     public EntityData _entityData;
 
     [SerializeField] Transform attackPoint;
-    [SerializeField] Animator animator;
+
+    [SerializeField] Animator _playerAnimator;
 
     private void Start()
     {
@@ -27,17 +28,17 @@ public class Jab : MonoBehaviour, IAttack
     public IEnumerator Attack()
     {
         _entityData.CanAttack = false;
-        animator.SetTrigger("Attack1"); 
+        _playerAnimator.SetTrigger("Attack1"); 
 
         yield return new WaitForSeconds(0.23f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);        
-        
+        Collider[] hitEnemiesR = Physics.OverlapBox(attackPoint.position, _entityData.AttackArea, Quaternion.identity.normalized, _entityData.enemyLayers);
+
         foreach (Collider enemy in hitEnemiesR)
         {
             
-            enemy.GetComponent<Enemy>().TakeDamage(_entityData.AttackDamage);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.AttackDamage + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_entityData.PunchDamage);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.PunchDamage + " of Damage.");
         }
 
         yield return new WaitForSeconds(0.17f);
@@ -50,7 +51,7 @@ public class Jab : MonoBehaviour, IAttack
     {
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, _entityData.AttackRadius);
+        Gizmos.DrawCube(attackPoint.position, _entityData.AttackArea);
         
         
         

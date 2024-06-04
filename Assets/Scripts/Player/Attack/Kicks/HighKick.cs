@@ -72,13 +72,13 @@ public class HighKick : MonoBehaviour,IAttack
 
         yield return new WaitForSeconds(0.23f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapBox(attackPoint.position, _entityData.AttackArea, Quaternion.identity.normalized, _entityData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
 
-            enemy.GetComponent<Enemy>().TakeDamage(_entityData.AttackDamage);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.AttackDamage + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_entityData.KickDamage + 5);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.KickDamage + 5 + " of Damage.");
         }
 
         yield return new WaitForSeconds(0.17f);
@@ -91,7 +91,7 @@ public class HighKick : MonoBehaviour,IAttack
     {
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, _entityData.AttackRadius);
+        Gizmos.DrawWireCube(attackPoint.position, _entityData.AttackArea);
 
 
 

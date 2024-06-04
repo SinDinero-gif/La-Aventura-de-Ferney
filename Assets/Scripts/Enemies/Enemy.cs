@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour, IEntity
         {
             navMeshAgent.SetDestination(_playerTransform.position);
 
-            if (distanceToPlayer <= _data.AttackRadius & _data.CanAttack)
+            if (distanceToPlayer <= 1f & _data.CanAttack)
             {
                 StartCoroutine(Attack());
                 Debug.Log(_data.Name + " ataca a Ferney!");
@@ -112,13 +112,13 @@ public class Enemy : MonoBehaviour, IEntity
 
         yield return new WaitForSeconds(1f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapBox(attackPoint.position, _data.AttackArea, Quaternion.identity.normalized, _data.enemyLayers);
 
         foreach (Collider other in hitEnemiesR)
         {
             if (other.TryGetComponent<Player.Player>(out Player.Player player))
             {
-                player.TakeDamage(_data.AttackDamage);
+                player.TakeDamage(_data.PunchDamage);
             }
         }
 
