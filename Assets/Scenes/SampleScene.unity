@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 33069909}
   - component: {fileID: 33069907}
   - component: {fileID: 33069910}
+  - component: {fileID: 33069912}
   - component: {fileID: 33069911}
   m_Layer: 9
   m_Name: Player
@@ -263,6 +264,21 @@ MonoBehaviour:
   _empanadaHalf: {fileID: 21300000, guid: 226783e4e2d63a54ca93bb88871223d2, type: 3}
   _empanadaEmpty: {fileID: 21300000, guid: 68e365c6153f9324fa13c90132756175, type: 3}
   _playerSpriteRenderer: {fileID: 1275059011}
+--- !u!114 &33069912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33069903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332761dfbb2e4e14fbe40d77481b2fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityData: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
+  attackPoint: {fileID: 86395657}
+  _playerAnimator: {fileID: 1275059012}
 --- !u!1 &86395656
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +304,7 @@ Transform:
   m_GameObject: {fileID: 86395656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: 0.45, z: 0.164}
+  m_LocalPosition: {x: 0.382, y: 0.45, z: 0.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6016,6 +6032,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 667902754455719793, guid: 72ca61fa22221384f978bcc935486415,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 667902754455719793, guid: 72ca61fa22221384f978bcc935486415,
         type: 3}
