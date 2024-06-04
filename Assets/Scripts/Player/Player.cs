@@ -7,6 +7,7 @@ namespace Player
     {
         [Header("Data")]
         [SerializeField] private EntityData _data;
+        [SerializeField] private ObjectData _objectData;
 
         [Header("Health")]
         private bool _isAlive = true;
