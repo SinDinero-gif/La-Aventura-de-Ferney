@@ -19,7 +19,7 @@ public class EntityData : ScriptableObject
     private int _kickDamage;
 
     [SerializeField]
-    private Vector3 _attackArea;
+    private float _attackRadius;
 
     [SerializeField]
     private bool _canAttack;
@@ -63,10 +63,10 @@ public class EntityData : ScriptableObject
         }
     }
 
-    public Vector3 AttackArea
+    public float AttackRadius
     {
-        get => _attackArea;
-        set {  _attackArea = value; }
+        get => _attackRadius;
+        set {  _attackRadius = value; }
     }
 
     public LayerMask enemyLayers;

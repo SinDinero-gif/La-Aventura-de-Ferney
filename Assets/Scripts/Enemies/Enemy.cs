@@ -1,7 +1,6 @@
-using DG.Tweening;
 using System;
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -11,7 +10,6 @@ public class Enemy : MonoBehaviour, IEntity
    
     [Header("Data")]
     [SerializeField] private EntityData _data;
-    [SerializeField] private EntityData _player;
 
     [Header("Health")]
     private bool _isAlive = true;
@@ -20,12 +18,11 @@ public class Enemy : MonoBehaviour, IEntity
     private float _fillSpeed = 0.42f;
     [SerializeField] 
     private Gradient _colorGradient;
-
+    
     [Header("AI")]
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float followDistance = 5f;
     [SerializeField] private Transform attackPoint;
-
     private NavMeshAgent navMeshAgent;
 
     [Header("SpriteManagement")]  
@@ -56,7 +53,6 @@ public class Enemy : MonoBehaviour, IEntity
 
     void Update()
     {
-
         Distance = Vector3.Distance(transform.position, _playerTransform.position);
         _animator.SetFloat("Distance",Distance);
         
@@ -114,12 +110,12 @@ public class Enemy : MonoBehaviour, IEntity
 
         yield return new WaitForSeconds(1f);
 
-        Collider[] hitEnemiesR = Physics.OverlapBox(attackPoint.position, _data.AttackArea, Quaternion.identity.normalized, _data.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
 
         foreach (Collider player in hitEnemiesR)
         {
             player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
-            Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de daño");
+            Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de daï¿½o");
         }
 
         yield return new WaitForSeconds(1f);
@@ -191,5 +187,13 @@ public class Enemy : MonoBehaviour, IEntity
         yield return new WaitForSeconds(1.5f);
 
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(attackPoint.position, _data.AttackRadius);
+
     }
 }
