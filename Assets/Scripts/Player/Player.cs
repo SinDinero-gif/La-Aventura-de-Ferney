@@ -25,8 +25,12 @@ public class Player : MonoBehaviour,IEntity
     [SerializeField] Sprite _empanadaHalf;
     [SerializeField] Sprite _empanadaEmpty;
     
-    [Header("SpriteManagement")]  
+    [Header("SpriteManagement")]
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
+    public SpriteRenderer playerSpriteRenderer => _playerSpriteRenderer;
+
+    [Header("Animation")]
+    public Animator playerAnimator;
     
     public Player Instance
     {
