@@ -46,7 +46,7 @@ public class Player : MonoBehaviour,IEntity
     
     public void Update()
     {
-        HealthCheck();
+       _data.CurrentHealth = Math.Clamp(_data.CurrentHealth, 0, _data.MaxHealth);
         
     }
     
@@ -57,6 +57,7 @@ public class Player : MonoBehaviour,IEntity
         _tookDamage = true;
         
         Debug.Log(_data.Name + " ha recibido 15 de daño");
+        Debug.Log(_data.CurrentHealth);
     
     
         if (_data.CurrentHealth <= 0)
@@ -72,66 +73,5 @@ public class Player : MonoBehaviour,IEntity
         _isAlive = false;
     }
     
-    public void HealthCheck()
-    {
-        switch (_data.CurrentHealth)
-        {
-            case 0:
-                if (_data.CurrentHealth >= 85.7f)
-                {
-                    _empanada1.sprite = _empanadaFull;
-                    _empanada2.sprite = _empanadaFull;
-                    _empanada3.sprite = _empanadaFull;
-                }
-                break;
-            case 1:
-                if (_data.CurrentHealth < 85.7f)
-                {
-                    _empanada1.sprite = _empanadaHalf;
-                    _empanada2.sprite = _empanadaFull;
-                    _empanada3.sprite = _empanadaFull;
-                }
-                break;
-            case 2:
-                if (_data.CurrentHealth < 71.4f)
-                {
-                    _empanada1.sprite = _empanadaEmpty;
-                    _empanada2.sprite = _empanadaFull;
-                    _empanada3.sprite = _empanadaFull;
-                }
-                break;
-            case 3:
-                if (_data.CurrentHealth < 57.1f)
-                {
-                    _empanada1.sprite = _empanadaEmpty;
-                    _empanada2.sprite = _empanadaHalf;
-                    _empanada3.sprite = _empanadaFull;
-                }                    
-                break;
-            case 4:
-                if (_data.CurrentHealth < 42.8f)
-                {
-                    _empanada1.sprite = _empanadaEmpty;
-                    _empanada2.sprite = _empanadaEmpty;
-                    _empanada3.sprite = _empanadaFull;
-                }                    
-                break;
-            case 5:
-                if (_data.CurrentHealth < 28.5)
-                {
-                    _empanada1.sprite = _empanadaEmpty;
-                    _empanada2.sprite = _empanadaEmpty;
-                    _empanada3.sprite = _empanadaHalf;
-                }                    
-                break;
-            case 6:
-                if (_data.CurrentHealth <= 0)
-                {
-                    _empanada1.sprite = _empanadaEmpty;
-                    _empanada2.sprite = _empanadaEmpty;
-                    _empanada3.sprite = _empanadaEmpty;
-                }                    
-                break;
-        }
-    }
+    
 }
