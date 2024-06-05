@@ -7,14 +7,14 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Player _player;
+
     private float _moveSpeed = 4f;
     private float _jumpForce = 6f;
     private float _hInput;
     private float _vInput;
 
     private bool _isGrounded;
-
-    [SerializeField] private SpriteRenderer _playerSprite;
 
     private Rigidbody _rb;
     
@@ -24,13 +24,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform tf;
     
 
-    private bool _isFlipped;
-    public static bool staticFlip;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _isFlipped = false;
         
     }
     
@@ -62,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        _isFlipped = staticFlip;
+        
 
         _hInput = Input.GetAxis("Horizontal");
         _vInput = Input.GetAxis("Vertical");
@@ -73,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
-            Jump();
+            StartCoroutine(Jump());
         }
 
         
@@ -84,29 +81,35 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _isGrounded = true;
+            _player.playerAnimator.SetBool("Grounded", true);
         }
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
-        
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         _isGrounded = false;
- 
+        _player.playerAnimator.SetBool("Jump", true);
+        _player.playerAnimator.SetBool("Grounded", false);
+
+        yield return new WaitForSeconds(0.3f);
+
+        _player.playerAnimator.SetBool("Jump", false);
+        _player.playerAnimator.SetBool("Grounded", false);
     }
 
     private void FLip()
     {
         if (_hInput < 0)
         {
-            _playerSprite.flipX = true;
-            _isFlipped = true;
+            _player.playerSpriteRenderer.flipX = true;
+            
 
         }
         else if (_hInput > 0)
         {
-            _playerSprite.flipX = false;
-            _isFlipped = false;
+            _player.playerSpriteRenderer.flipX = false;
+            
         }
     }
 
@@ -118,6 +121,11 @@ public class PlayerMovement : MonoBehaviour
             _rb.MovePosition(_rb.position + movement);
 
             Debug.Log("Moving");
+            _player.playerAnimator.SetBool("Walking", true);
+        }
+        else
+        {
+            _player.playerAnimator.SetBool("Walking", false);
         }
     }
 }
