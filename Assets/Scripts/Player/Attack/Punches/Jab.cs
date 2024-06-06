@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class Jab : MonoBehaviour, IAttack
+public class Jab1 : MonoBehaviour, IAttack
 {
     public EntityData _entityData;
 
@@ -11,8 +11,11 @@ public class Jab : MonoBehaviour, IAttack
 
     [SerializeField] Animator _playerAnimator;
 
+    public int attackCounter;
+
     private void Start()
     {
+        int attackCounter = 0;
         _entityData.CanAttack = true;
     }
 
