@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -14,7 +15,11 @@ public class FinalBoss : MonoBehaviour
    [Header("IA")]
    [SerializeField] private Transform player;
    [SerializeField] private float followDistance = 5f;
+   [SerializeField] private GameObject bornPrefab;
+   [SerializeField] private Transform attackPoint;
+   private float distanceToPlayer;
    private NavMeshAgent _meshAgent;
+   
    
    [Header("Animation")]
    [SerializeField] Animator _animator;
@@ -26,6 +31,8 @@ public class FinalBoss : MonoBehaviour
       _data.CanAttack = true;
       _meshAgent = GetComponent<NavMeshAgent>();
       _meshAgent.updateRotation = false;
+      StartCoroutine(SpitAttack());
+
 
    }
 
@@ -34,6 +41,7 @@ public class FinalBoss : MonoBehaviour
       Movement();
       RandomAttack(randomIndex:0);
       
+
    }
 
    private void Movement()
@@ -44,7 +52,7 @@ public class FinalBoss : MonoBehaviour
       {
          _meshAgent.SetDestination(player.position);
 
-         if (distanceToPlayer <= 1f & _data.CanAttack)
+         if (distanceToPlayer <= 10f & _data.CanAttack)
          {
                 
          }
@@ -60,32 +68,80 @@ public class FinalBoss : MonoBehaviour
       switch (attackNumber)
       {
          case 0 :
-            SpitAttack();
+            {
+               SpitAttack();
+            }
             break;
-         case 1 : 
-            BornAtack();
+         case 1 :
+            {
+               BurnAttack();
+            }
             break;
          case 2:
             BiteAttack();
             break;
-            
+         case 3:
+            JumpAttack();
+            break;
             
       }
    }
 
-   private void SpitAttack()
+   public IEnumerator BurnAttack()
    {
-      
+      _data.CanAttack = false;
+        
+      _animator.SetTrigger("Attack");
+
+      yield return new WaitForSeconds(1f);
+
+      Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
+
+      foreach (Collider player in hitEnemiesR)
+      {
+         player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
+         
+      }
+
+      yield return new WaitForSeconds(1f);
+
+      _data.CanAttack = true;
+
    }
 
-   private void BornAtack()
+
+   public IEnumerator SpitAttack()
    {
-      
+      while (true)
+      {
+            GameObject born = Instantiate(bornPrefab, transform.position, quaternion.identity);
+            Rigidbody rb = born.GetComponent<Rigidbody>();
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
+
+            foreach (Collider player in hitEnemiesR)
+            {
+               player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
+         
+            }
+            rb.AddForce(direction * 1000);
+            yield return new WaitForSeconds(7f);
+      }
+        
    }
+   
+
+   
+
 
    private void BiteAttack()
    {
       
    }
-   
+
+   private void JumpAttack()
+   {
+      
+   }
+
 }

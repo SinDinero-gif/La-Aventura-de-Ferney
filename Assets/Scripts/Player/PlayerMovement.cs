@@ -119,8 +119,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 movement = new Vector3(_hInput, 0, _vInput) * _moveSpeed * Time.deltaTime;
             _rb.MovePosition(_rb.position + movement);
-
-            Debug.Log("Moving");
+            
             _player.playerAnimator.SetBool("Walking", true);
         }
         else
