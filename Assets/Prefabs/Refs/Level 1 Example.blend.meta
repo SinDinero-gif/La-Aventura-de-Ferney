@@ -12,8 +12,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: BackGround_Parallax_3.002
+    second: {fileID: 2100000, guid: 805525988925f0a4785dfb2a9d751591, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Lit.001
     second: {fileID: 2100000, guid: ac1e55bbae983f044856af6dfa5cfde7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lit.002
+    second: {fileID: 2100000, guid: cd30bb0d87a4c1440941fc7ccb1ff858, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 204554409ecab264191a27af0a8f4d84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oak wooden floor
+    second: {fileID: 2100000, guid: e63b183f46d012c408c133c756688b73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxid metal
+    second: {fileID: 2100000, guid: 9d74c021e59eca34d916273aef39dce0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scratched Tinted Metal
+    second: {fileID: 2100000, guid: ea4bd6678f5f68e4ca49fca9e15345a0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

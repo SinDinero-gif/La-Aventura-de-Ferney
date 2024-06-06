@@ -5,34 +5,34 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Object Data",menuName = "Object Data")] 
 public class ObjectData : ScriptableObject
 {
-   [SerializeField] private string name;
-   [SerializeField] private string description;
-   [SerializeField] private int damage;
-   [SerializeField] private int health;
+   [SerializeField] private string _name;
+   [SerializeField] private string _description;
+   [SerializeField] private int _dataAttack;
+   [SerializeField] private int _dataHealth;
 
    
    public string Name
    {
-      get { return name;}
-      set { name = value; }
+      get { return _name;}
+      set { _name = value; }
    }
 
    public string Description
    {
-      get { return description; }
-      set { description = value; }
+      get { return _description; }
+      set { _description = value; }
    }
 
    public int DamagePlus
    {
-      get { return damage; }
-      set { damage = value; }
+      get { return _dataAttack; }
+      set { _dataAttack = value; }
    }
 
    public int HealthPlus
    {
-      get { return health; }
-      set { health = value; }
+      get { return _dataHealth; }
+      set { _dataHealth = value; }
    }
 
 
