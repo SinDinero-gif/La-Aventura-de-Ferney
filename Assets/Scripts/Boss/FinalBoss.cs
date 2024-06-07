@@ -114,20 +114,14 @@ public class FinalBoss : MonoBehaviour
    {
       while (true)
       {
-            GameObject born = Instantiate(bornPrefab, transform.position, quaternion.identity);
-            Rigidbody rb = born.GetComponent<Rigidbody>();
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
-
-            foreach (Collider player in hitEnemiesR)
-            {
-               player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
-         
-            }
-            rb.AddForce(direction * 1000);
-            yield return new WaitForSeconds(7f);
+         GameObject spit = Instantiate(bornPrefab, transform.position, Quaternion.identity);
+         Rigidbody rb = spit.GetComponent<Rigidbody>();
+         Vector3 direction = (player.transform.position - transform.position).normalized;
+         Spit spitA = spit.AddComponent<Spit>();
+         spitA.damage = 10; 
+         rb.AddForce(direction * 4000);
+         yield return new WaitForSeconds(7f);
       }
-        
    }
    
 

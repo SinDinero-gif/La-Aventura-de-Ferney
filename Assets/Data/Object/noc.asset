@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1a3daf51d184c09af44a5fcebd26d1, type: 3}
   m_Name: noc
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  damage: 0
-  health: 0
+  _name: 
+  _description: 
+  _dataAttack: 0
+  _dataHealth: 0

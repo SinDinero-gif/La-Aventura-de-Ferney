@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1863308932584466067}
   - component: {fileID: 6446963591096442880}
   - component: {fileID: 4638314413192043012}
+  - component: {fileID: 3600266414478234540}
   m_Layer: 0
   m_Name: Born
   m_TagString: Untagged
@@ -100,7 +101,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -133,3 +134,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3600266414478234540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384138845027858702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e17ef48caf34e5888176c8be15a708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
