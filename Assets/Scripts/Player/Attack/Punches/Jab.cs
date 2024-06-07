@@ -11,24 +11,37 @@ public class Jab : MonoBehaviour, IAttack
 
     [SerializeField] Animator _playerAnimator;
 
+    private int attackCounter;
+
     private void Start()
     {
+        attackCounter = 0;
         _entityData.CanAttack = true;
     }
 
     private void Update()
     {      
 
-        if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack)
+        if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack && attackCounter < 1)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(Attack1());
+            attackCounter++;
+            Debug.Log(attackCounter);
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack && attackCounter >= 1)
+        {
+            StartCoroutine(Attack1());
+            attackCounter = 0;
+            Debug.Log(attackCounter);
+        }
+
     }
 
-    public IEnumerator Attack()
+    public IEnumerator Attack1()
     {
         _entityData.CanAttack = false;
-        _playerAnimator.SetTrigger("Attack1"); 
+        _playerAnimator.SetInteger("Punch", attackCounter); 
 
         yield return new WaitForSeconds(0.23f);
 
