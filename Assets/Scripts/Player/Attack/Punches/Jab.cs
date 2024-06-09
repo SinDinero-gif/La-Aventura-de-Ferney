@@ -31,17 +31,36 @@ public class Jab : MonoBehaviour, IAttack
 
         if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack && attackCounter >= 1)
         {
-            StartCoroutine(Attack1());
+            StartCoroutine(Attack2());
             attackCounter = 0;
             Debug.Log(attackCounter);
         }
 
     }
 
-    public IEnumerator Attack1()
+    private IEnumerator Attack2()
     {
         _entityData.CanAttack = false;
-        _playerAnimator.SetInteger("Punch", attackCounter); 
+        _playerAnimator.SetTrigger("Attack2");
+
+        yield return new WaitForSeconds(0.23f);
+
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);
+
+        foreach (Collider enemy in hitEnemiesR)
+        {
+
+            enemy.GetComponent<Enemy>().TakeDamage(_entityData.PunchDamage + 5);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.PunchDamage + 5 + " of Damage.");
+        }
+
+        yield return new WaitForSeconds(0.13f);
+    }
+
+    public IEnumerator Attack1()
+    {
+        
+        _playerAnimator.SetTrigger("Attack1"); 
 
         yield return new WaitForSeconds(0.23f);
 
@@ -54,7 +73,7 @@ public class Jab : MonoBehaviour, IAttack
             Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.PunchDamage + " of Damage.");
         }
 
-        yield return new WaitForSeconds(0.17f);
+        yield return new WaitForSeconds(0.13f);
 
         _entityData.CanAttack = true;
        
