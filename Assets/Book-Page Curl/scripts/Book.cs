@@ -376,7 +376,7 @@ public class Book : MonoBehaviour {
         else
         currentCoroutine = StartCoroutine(TweenTo(ebr, 0.15f, () => { Flip(); }));
     }
-    void Flip()
+    public void Flip()
     {
         if (mode == FlipMode.RightToLeft)
             currentPage += 2;

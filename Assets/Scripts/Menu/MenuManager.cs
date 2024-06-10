@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("UI")]
+
     [SerializeField] Animator _menuUI;
 
     [SerializeField] GameObject _buttons;
@@ -16,6 +19,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject _playButton;
 
     [SerializeField] Animator _titles;
+    
 
     private bool buttons;
     private int bookPage;
@@ -26,6 +30,7 @@ public class MenuManager : MonoBehaviour
         bookPage = 0;
         _playButton.SetActive(false);
         _buttons.SetActive(false);
+
     }
 
     public void Update()
@@ -33,7 +38,9 @@ public class MenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !buttons)
         {
             _menuUI.SetInteger("State", 1);
+
             _render.SetInteger("State", 1);
+
             buttons = true;
 
             if (buttons)
@@ -42,10 +49,21 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        if (bookPage >= 1)
+
+        if (bookPage >= 2)
         {
-            _playButton.SetActive(true);
+            StartCoroutine(ComicTransition2());
         }
+
+    }
+
+    private IEnumerator ComicTransition2()
+    {
+        yield return new WaitForSeconds(0.6f);
+
+        _playButton.SetActive(true);
+
+       
 
     }
 
