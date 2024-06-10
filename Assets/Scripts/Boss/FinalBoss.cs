@@ -17,6 +17,10 @@ public class FinalBoss : MonoBehaviour
    [SerializeField] private float followDistance = 5f;
    [SerializeField] private GameObject bornPrefab;
    [SerializeField] private Transform attackPoint;
+   [SerializeField] private float ForceJump;
+   //private bool isGrounded = true;
+   private bool isAttacking = false;
+   private Rigidbody rb;
    private float distanceToPlayer;
    private NavMeshAgent _meshAgent;
    
@@ -31,36 +35,40 @@ public class FinalBoss : MonoBehaviour
       _data.CanAttack = true;
       _meshAgent = GetComponent<NavMeshAgent>();
       _meshAgent.updateRotation = false;
-      StartCoroutine(SpitAttack());
+      rb = GetComponent<Rigidbody>();
+      player = GameObject.FindGameObjectWithTag("Player").transform;
+
 
 
    }
 
    private void Update()
    {
-      Movement();
-      RandomAttack(randomIndex:0);
       
+      if(!_data.CanAttack || isAttacking) return;
+      StartCoroutine(RandomAttack(randomIndex:5));
+      Movement();
+
 
    }
 
    private void Movement()
    {
-      float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-      if (distanceToPlayer < followDistance) 
+      float distance = Vector3.Distance(transform.position, player.position);
+      //isGrounded = true;
+      RaycastHit hit;
+      if (distance < followDistance)
       {
-         _meshAgent.SetDestination(player.position);
-
-         if (distanceToPlayer <= 10f & _data.CanAttack)
-         {
-                
-         }
-
+         Jump();
       }
    }
 
-   private void RandomAttack(int randomIndex)
+   private void Jump()
+   {
+      rb.AddForce(Vector3.up * ForceJump);
+   }
+
+   private IEnumerator RandomAttack(int randomIndex)
    {
       randomIndex = Random.Range(1, 5);
       
@@ -68,20 +76,16 @@ public class FinalBoss : MonoBehaviour
       switch (attackNumber)
       {
          case 0 :
-            {
-               SpitAttack();
-            }
+            yield return StartCoroutine(SpitAttack());
             break;
          case 1 :
-            {
-               BurnAttack();
-            }
+              yield return StartCoroutine(BurnAttack());
             break;
          case 2:
-            BiteAttack();
+            yield return StartCoroutine(BiteAttack());
             break;
          case 3:
-            JumpAttack();
+            yield return StartCoroutine(JumpAttack());
             break;
             
       }
@@ -114,6 +118,7 @@ public class FinalBoss : MonoBehaviour
    {
       while (true)
       {
+         _animator.SetTrigger("AttackSpirit");
          GameObject spit = Instantiate(bornPrefab, transform.position, Quaternion.identity);
          Rigidbody rb = spit.GetComponent<Rigidbody>();
          Vector3 direction = (player.transform.position - transform.position).normalized;
@@ -128,14 +133,14 @@ public class FinalBoss : MonoBehaviour
    
 
 
-   private void BiteAttack()
+   private IEnumerator BiteAttack()
    {
-      
+      yield return new WaitForSeconds(5f);
    }
 
-   private void JumpAttack()
+   private IEnumerator JumpAttack()
    {
-      
+      yield return new WaitForSeconds(5f);
    }
 
 }
