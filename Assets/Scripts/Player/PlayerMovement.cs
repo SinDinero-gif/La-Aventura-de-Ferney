@@ -1,71 +1,65 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
 
     private float _moveSpeed = 4f;
     private float _jumpForce = 6f;
+    private Vector3 movement;
     private float _hInput;
     private float _vInput;
 
     private bool _isGrounded;
 
     private Rigidbody _rb;
-    
-    //[SerializeField] private Animator playerAnimator;
-    private int comboCounter;
-    private bool _isAttacking;
-    public Transform tf;
-    
+    private PlayerInput _playerInput;
+    private PlayerInputs _playerInputActions;
+
+    private Vector2 _inputVector;
 
 
-    void Start()
+
+
+    void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _playerInput = GetComponent<PlayerInput>();
+
+        _playerInputActions = new PlayerInputs();
+        _playerInputActions.Player.Enable();
+        _playerInputActions.Player.Move.performed += Move_performed;
         
-    }
-    
-    public void ComboStart()
-    {
-        _isAttacking = false;
-        if (comboCounter < 3)
-        {
-            comboCounter++;
-        }
-        
-    }
-    
-    public void ComboEnd()
-    {
-        _isAttacking = false;
-        comboCounter = 0;
     }
 
-    public void Combos()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !_isAttacking)
-        {
-            _isAttacking = true;
-           // playerAnimator.SetInteger("Punch", comboCounter);
-        }
+        
+    }
+
+    private void Move_performed(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+        _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
+        _rb.velocity = new Vector3(_inputVector.x, 0, _inputVector.y) * _moveSpeed;
+
     }
 
     void Update()
     {
-        
-        
-
-        _hInput = Input.GetAxis("Horizontal");
-        _vInput = Input.GetAxis("Vertical");
-
         Move();
-        Combos();
+        
+
+
         FLip();
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
@@ -74,6 +68,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
+    }
+
+    private void Move()
+    {
+        _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
+        _rb.velocity = new Vector3(_inputVector.x, 0, _inputVector.y) * _moveSpeed;
+
+        if(_inputVector.x > 0 || _inputVector.x < 0)
+        {
+            _player.playerAnimator.SetBool("Walking", true);
+        }
+        else
+        {
+            _player.playerAnimator.SetBool("Walking", false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -100,31 +109,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void FLip()
     {
-        if (_hInput < 0)
+        if (_inputVector.x < 0)
         {
-            _player.playerSpriteRenderer.flipX = true;
+           _spriteRenderer.flipX = true;
             
 
         }
-        else if (_hInput > 0)
+        else if (_inputVector.x > 0)
         {
-            _player.playerSpriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
             
-        }
-    }
-
-    private void Move()
-    {
-        if (_hInput != 0 || _vInput != 0)
-        {
-            Vector3 movement = new Vector3(_hInput, 0, _vInput) * _moveSpeed * Time.deltaTime;
-            _rb.MovePosition(_rb.position + movement);
-            
-            _player.playerAnimator.SetBool("Walking", true);
-        }
-        else
-        {
-            _player.playerAnimator.SetBool("Walking", false);
         }
     }
 }
