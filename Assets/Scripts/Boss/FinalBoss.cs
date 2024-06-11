@@ -10,18 +10,21 @@ using Random = UnityEngine.Random;
 public class FinalBoss : MonoBehaviour
 {
    [Header("Data")]
-   [SerializeField] private EntityData _data;
+   [SerializeField] private DataBoss _data;
    
    [Header("IA")]
    [SerializeField] private Transform player;
-   [SerializeField] private float followDistance = 5f;
+   [SerializeField] private float followDistance = 20f;
    [SerializeField] private GameObject bornPrefab;
    [SerializeField] private Transform attackPoint;
    [SerializeField] private float ForceJump;
-   //private bool isGrounded = true;
+   private bool isGrounded = true;
+   private bool canJump = true;
    private bool isAttacking = false;
-   private Rigidbody rb;
-   private float distanceToPlayer;
+   private Rigidbody _rb;
+   private float _distanceToPlayer;
+   private float groundCheckDistance = 5f;
+   [SerializeField] private LayerMask suelo;
    private NavMeshAgent _meshAgent;
    
    
@@ -35,7 +38,7 @@ public class FinalBoss : MonoBehaviour
       _data.CanAttack = true;
       _meshAgent = GetComponent<NavMeshAgent>();
       _meshAgent.updateRotation = false;
-      rb = GetComponent<Rigidbody>();
+      _rb = GetComponent<Rigidbody>();
       player = GameObject.FindGameObjectWithTag("Player").transform;
 
 
@@ -44,29 +47,20 @@ public class FinalBoss : MonoBehaviour
 
    private void Update()
    {
-      
-      if(!_data.CanAttack || isAttacking) return;
-      StartCoroutine(RandomAttack(randomIndex:5));
-      Movement();
-
-
+      isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, suelo);
+      if(!_data.CanAttack || isAttacking || !isGrounded || !canJump) return;
+      //StartCoroutine(RandomAttack(randomIndex:5));
+      StartCoroutine(JumpAttack());
    }
 
-   private void Movement()
-   {
-      float distance = Vector3.Distance(transform.position, player.position);
-      //isGrounded = true;
-      RaycastHit hit;
-      if (distance < followDistance)
-      {
-         Jump();
-      }
-   }
+   
+   
 
-   private void Jump()
-   {
-      rb.AddForce(Vector3.up * ForceJump);
-   }
+  
+
+
+
+
 
    private IEnumerator RandomAttack(int randomIndex)
    {
@@ -84,9 +78,6 @@ public class FinalBoss : MonoBehaviour
          case 2:
             yield return StartCoroutine(BiteAttack());
             break;
-         case 3:
-            yield return StartCoroutine(JumpAttack());
-            break;
             
       }
    }
@@ -95,7 +86,7 @@ public class FinalBoss : MonoBehaviour
    {
       _data.CanAttack = false;
         
-      _animator.SetTrigger("Attack");
+      //_animator.SetTrigger("Attack");
 
       yield return new WaitForSeconds(1f);
 
@@ -103,7 +94,7 @@ public class FinalBoss : MonoBehaviour
 
       foreach (Collider player in hitEnemiesR)
       {
-         player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
+         player.GetComponent<Player>().TakeDamage(_data.BurnDamage);
          
       }
 
@@ -125,7 +116,7 @@ public class FinalBoss : MonoBehaviour
          Spit spitA = spit.AddComponent<Spit>();
          spitA.damage = 10; 
          rb.AddForce(direction * 4000);
-         yield return new WaitForSeconds(7f);
+         yield return new WaitForSeconds(1f);
       }
    }
    
@@ -140,7 +131,28 @@ public class FinalBoss : MonoBehaviour
 
    private IEnumerator JumpAttack()
    {
+      canJump = false;
+      _meshAgent.enabled = false;
+      _rb.AddForce(new Vector3(0, ForceJump, 0), ForceMode.Impulse);
+      Vector3 direction = (player.position - transform.position).normalized;
+      _rb.AddForce(new Vector3(direction.x * ForceJump, ForceJump, direction.z * ForceJump), ForceMode.VelocityChange);
+      _animator.SetTrigger("Jump");
+      isGrounded = false;
+      yield return new WaitUntil(() => Physics.CheckSphere(transform.position, groundCheckDistance, suelo));
+      
       yield return new WaitForSeconds(5f);
+      _meshAgent.enabled = true;
+      isGrounded = true;
+      canJump = true;
+
    }
+   void OnDrawGizmos()
+   {
+      
+      Gizmos.color = Color.red;
+      Gizmos.DrawWireSphere(transform.position, groundCheckDistance);
+   }
+   
+   
 
 }
