@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -16,18 +12,12 @@ public class PlayerMovement : MonoBehaviour
 
     private float _moveSpeed = 4f;
     [SerializeField] private float _jumpForce = 20f;
-    [SerializeField] private float _gForce = -9.8f;
-    private Vector3 movement;
-    private float _hInput;
-    private float _vInput;
 
     [Header("Ground Check")]
-    public Transform groundChekPos;
-    public Vector2 groundCheckSize = new Vector2(0.1f, 0.1f);
+    public Transform groundChekPos;   
     public LayerMask groundLayer;
 
     private Rigidbody _rb;
-    private PlayerInput _playerInput;
     private PlayerInputs _playerInputActions;
 
     private Vector2 _inputVector;
@@ -38,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
 
         _playerInputActions = new PlayerInputs();
         _playerInputActions.Player.Enable();
@@ -49,41 +38,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        
     }
 
 
     private void Move_performed(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
         _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
-        _rb.velocity = new Vector3(_inputVector.x, 0, _inputVector.y) * _moveSpeed;
-
     }
+
     private void Jump(InputAction.CallbackContext context)
     {
-        if (isGrounded() && context.performed)
+        if (IsGrounded() && context.performed)
         {
-            Debug.Log("Jump!");
-
             StartCoroutine(JumpMethod());
         }
-       
     }
 
     private IEnumerator JumpMethod()
     {
-        _rb.AddForce(Vector3.up * _jumpForce);
-
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _player.playerAnimator.SetBool("Jump", true);
 
         yield return new WaitForSeconds(0.3f);
 
-
-
+        _player.playerAnimator.SetBool("Jump", false);
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
-        return Physics.Raycast(groundChekPos.position, Vector3.down, 0.6f, groundLayer);
+        return Physics.Raycast(groundChekPos.position, Vector3.down, 0.12f, groundLayer);
     }
         
 
@@ -93,27 +77,31 @@ public class PlayerMovement : MonoBehaviour
 
         Flip();
 
-        isGrounded();
+        IsGrounded();
+
+        if (IsGrounded())
+        {
+            _player.playerAnimator.SetBool("Grounded", true);
+        }
+        else
+        {
+            _player.playerAnimator.SetBool("Grounded", false);
+        }
     }
 
     private void Move()
     {
         _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
-        _rb.velocity = new Vector3(_inputVector.x, 0, _inputVector.y) * _moveSpeed;
+        _rb.velocity = new Vector3(_inputVector.x * _moveSpeed, _rb.velocity.y, _inputVector.y * _moveSpeed);
 
-        if(_inputVector.x != 0 && _inputVector.y != 0)
+        if (_inputVector.x != 0 && _inputVector.y != 0)
         {
-            _animator.SetBool("Walking", true);
+            _player.playerAnimator.SetBool("Walking", true);
         }
         else
         {
-            _animator.SetBool("Walking", false);
+            _player.playerAnimator.SetBool("Walking", false);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        _rb.AddForce(new Vector3(_rb.velocity.x, _rb.velocity.y * -_gForce, _rb.velocity.z));
     }
 
     private void Flip()
