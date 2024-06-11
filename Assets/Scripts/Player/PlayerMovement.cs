@@ -11,15 +11,20 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Animator _animator;
 
 
     private float _moveSpeed = 4f;
-    private float _jumpForce = 6f;
+    [SerializeField] private float _jumpForce = 20f;
+    [SerializeField] private float _gForce = -9.8f;
     private Vector3 movement;
     private float _hInput;
     private float _vInput;
 
-    private bool _isGrounded;
+    [Header("Ground Check")]
+    public Transform groundChekPos;
+    public Vector2 groundCheckSize = new Vector2(0.1f, 0.1f);
+    public LayerMask groundLayer;
 
     private Rigidbody _rb;
     private PlayerInput _playerInput;
@@ -38,13 +43,14 @@ public class PlayerMovement : MonoBehaviour
         _playerInputActions = new PlayerInputs();
         _playerInputActions.Player.Enable();
         _playerInputActions.Player.Move.performed += Move_performed;
+        _playerInputActions.Player.Jump.performed += Jump;
         
     }
 
     private void Start()
     {
-        
     }
+
 
     private void Move_performed(InputAction.CallbackContext context)
     {
@@ -53,21 +59,41 @@ public class PlayerMovement : MonoBehaviour
         _rb.velocity = new Vector3(_inputVector.x, 0, _inputVector.y) * _moveSpeed;
 
     }
+    private void Jump(InputAction.CallbackContext context)
+    {
+        if (isGrounded() && context.performed)
+        {
+            Debug.Log("Jump!");
+
+            StartCoroutine(JumpMethod());
+        }
+       
+    }
+
+    private IEnumerator JumpMethod()
+    {
+        _rb.AddForce(Vector3.up * _jumpForce);
+
+
+        yield return new WaitForSeconds(0.3f);
+
+
+
+    }
+
+    private bool isGrounded()
+    {
+        return Physics.Raycast(groundChekPos.position, Vector3.down, 0.6f, groundLayer);
+    }
+        
 
     void Update()
     {
         Move();
-        
 
+        Flip();
 
-        FLip();
-
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-        {
-            StartCoroutine(Jump());
-        }
-
-        
+        isGrounded();
     }
 
     private void Move()
@@ -75,50 +101,32 @@ public class PlayerMovement : MonoBehaviour
         _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
         _rb.velocity = new Vector3(_inputVector.x, 0, _inputVector.y) * _moveSpeed;
 
-        if(_inputVector.x > 0 || _inputVector.x < 0)
+        if(_inputVector.x != 0 && _inputVector.y != 0)
         {
-            _player.playerAnimator.SetBool("Walking", true);
+            _animator.SetBool("Walking", true);
         }
         else
         {
-            _player.playerAnimator.SetBool("Walking", false);
+            _animator.SetBool("Walking", false);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        _rb.AddForce(new Vector3(_rb.velocity.x, _rb.velocity.y * -_gForce, _rb.velocity.z));
+    }
+
+    private void Flip()
+    {
+        if(_inputVector.x < 0)
         {
-            _isGrounded = true;
-            _player.playerAnimator.SetBool("Grounded", true);
-        }
-    }
+            _spriteRenderer.flipX = true;
 
-    private IEnumerator Jump()
-    {
-        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-        _isGrounded = false;
-        _player.playerAnimator.SetBool("Jump", true);
-        _player.playerAnimator.SetBool("Grounded", false);
-
-        yield return new WaitForSeconds(0.3f);
-
-        _player.playerAnimator.SetBool("Jump", false);
-        _player.playerAnimator.SetBool("Grounded", false);
-    }
-
-    private void FLip()
-    {
-        if (_inputVector.x < 0)
-        {
-           _spriteRenderer.flipX = true;
-            
-
-        }
-        else if (_inputVector.x > 0)
+        }else if(_inputVector.x > 0) 
         {
             _spriteRenderer.flipX = false;
-            
         }
     }
+
+
 }

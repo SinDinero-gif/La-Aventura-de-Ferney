@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3092617524572371188}
   - component: {fileID: 6473135842005483788}
   - component: {fileID: 9112100160517449459}
-  - component: {fileID: 4511532165689978204}
+  - component: {fileID: 345185838824386792}
   m_Layer: 9
   m_Name: Player
   m_TagString: player
@@ -138,7 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 9112100160517449459}
   _spriteRenderer: {fileID: 1485016155555233116}
-  _playerAnimator: {fileID: 455976795372835775}
 --- !u!114 &3092617524572371188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +191,7 @@ MonoBehaviour:
   _empanadaEmpty: {fileID: 21300000, guid: 68e365c6153f9324fa13c90132756175, type: 3}
   _playerSpriteRenderer: {fileID: 1485016155555233116}
   playerAnimator: {fileID: 455976795372835775}
---- !u!114 &4511532165689978204
+--- !u!114 &345185838824386792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: b1c17caef6728ed47bf7ba23d0552e42,
     type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -217,18 +216,7 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 572535a0-145c-4259-a5a1-42b0aef89e53
-    m_ActionName: Player/MoveJoystick[/Twin USB Gamepad      /stick/up,/Twin USB
-      Gamepad      1/stick/up,/Twin USB Gamepad      /stick/down,/Twin USB Gamepad     
-      1/stick/down,/Twin USB Gamepad      /stick/left,/Twin USB Gamepad      1/stick/left,/Twin
-      USB Gamepad      /stick/right,/Twin USB Gamepad      1/stick/right]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a1346233-5a34-430f-bac1-f9776b3be4b2
-    m_ActionName: Player/Jump
+  m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
