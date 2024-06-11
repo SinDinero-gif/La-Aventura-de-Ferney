@@ -94,10 +94,21 @@
                 {
                     "name": "",
                     "id": "3bbc3928-0f99-49b9-926e-ff3e7e52f75f",
-                    "path": "",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25a53785-2566-4b05-87e2-ba7dcc6a1058",
+                    "path": "<HID::Twin USB Gamepad      >/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
