@@ -9,17 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 432ac5d152162b04b876c34ff9191eb8, type: 3}
-  m_Name: RatBoss
+  m_Script: {fileID: 11500000, guid: 6b6c6787bb3d7a04097b14be67659bd4, type: 3}
+  m_Name: Boss
   m_EditorClassIdentifier: 
   _id: 0
-  _name: 
-  _punchDamage: 0
-  _kickDamage: 0
+  name: the Fucking Boss
+  _burnDamage: 10
+  _jumpDamage: 20
+  _biteDamage: 20
+  _spitDamage: 20
   _attackRadius: 0
-  _canAttack: 0
-  _maxHealth: 0
-  _currentHealth: 0
+  _currentHealth: 100
+  _maxCurrentHealth: 100
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
