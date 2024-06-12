@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float followDistance = 5f;
     [SerializeField] private Transform attackPoint;
-    private NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
 
     [Header("SpriteManagement")]  
     [SerializeField] private SpriteRenderer _enemySprite;
@@ -36,6 +36,16 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] Animator _animator;
 
     [SerializeField] private float Distance;
+
+    private static Enemy _instance;
+
+    public static Enemy Instance => _instance;
+
+    void Awake()
+    {
+        _instance = this;
+        _animator.SetInteger("Active", 1);
+    }
    
 
     
@@ -61,11 +71,13 @@ public class Enemy : MonoBehaviour, IEntity
             StartCoroutine(DamageAnim());
         }
 
+        
+
         if (_isAlive == false)
         {
             _data.CanAttack = false;
             _tookDamage = false;
-            _animator.SetBool("Damaged", false);
+            navMeshAgent.isStopped = true;
 
             //Death Animation
             _animator.SetTrigger("Die");
@@ -79,6 +91,15 @@ public class Enemy : MonoBehaviour, IEntity
         FlipSprite(_playerTransform.position);
 
         Movement();
+
+        if(Player.Instance.isAlive == false)
+        {
+            _animator.SetInteger("Active", 0);
+        }
+        else
+        {
+            _animator.SetInteger("Active", 1);
+        }
 
     }
 
@@ -108,7 +129,7 @@ public class Enemy : MonoBehaviour, IEntity
         
         _animator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
 
@@ -118,7 +139,7 @@ public class Enemy : MonoBehaviour, IEntity
             Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de da�o");
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         _data.CanAttack = true;
         
@@ -140,15 +161,19 @@ public class Enemy : MonoBehaviour, IEntity
     private IEnumerator DamageAnim()
     {
         _animator.SetBool("Damaged", true);
+        _data.CanAttack = false;
 
-        yield return new WaitForSeconds(0.24f);
+        yield return new WaitForSeconds(2f);
 
         _animator.SetBool("Damaged", false);
         _tookDamage = false;
+        _data.CanAttack = true;
     }
 
     public void TakeDamage(int damage)
     {
+        Debug.Log(_data.Name + " ha sido herido");
+
         _data.CurrentHealth -= damage;
         _tookDamage = true;
         _animator.SetTrigger("Attack");
@@ -163,6 +188,7 @@ public class Enemy : MonoBehaviour, IEntity
         if (_data.CurrentHealth <= 0) 
         {
             Die();
+            navMeshAgent.Stop();
                      
         }
 
@@ -174,9 +200,6 @@ public class Enemy : MonoBehaviour, IEntity
         
 
         Debug.Log("The " + _data.Name + " is Dead");
-        
-        
-
         
 
     }

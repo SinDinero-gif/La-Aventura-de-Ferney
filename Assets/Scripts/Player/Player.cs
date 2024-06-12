@@ -2,17 +2,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour,IEntity
-{   
+public class Player : MonoBehaviour, IEntity
+{
     [Header("Data")]
     // Updated upstream
     public EntityData _data;
     [SerializeField] private ObjectData _objectData;
-    Player _instance;
-    
+
     [Header("Health")]
-    private bool _isAlive = true;
+    public bool isAlive = true;
     private bool _tookDamage = false;
+
+    [SerializeField] private Enemy _enemy;
     
     [Header("Health UI")]
     [SerializeField] private GameObject _healthBar;
@@ -31,14 +32,15 @@ public class Player : MonoBehaviour,IEntity
 
     [Header("Animation")]
     public Animator playerAnimator;
-    
-    public Player Instance
+
+    private static Player _instance;
+    public static Player Instance => _instance;
+
+    private void Awake()
     {
-        get; set;
+        _instance = this;
     }
-    
-    public bool TookDamage { get => _tookDamage;}
-    
+
     private void Start()
     {
         _data.CurrentHealth = _data.MaxHealth;
@@ -47,7 +49,19 @@ public class Player : MonoBehaviour,IEntity
     public void Update()
     {
        _data.CurrentHealth = Math.Clamp(_data.CurrentHealth, 0, _data.MaxHealth);
-        
+
+        if (!isAlive)
+        {
+            Die();
+            Debug.Log("The " + _data.Name + " is Dead");
+            Enemy.Instance.navMeshAgent.isStopped = true;
+
+        }
+        else
+        {
+            
+        }
+
     }
     
     
@@ -55,22 +69,25 @@ public class Player : MonoBehaviour,IEntity
     {
         _data.CurrentHealth -= damage;
         _tookDamage = true;
-        
+
         Debug.Log(_data.Name + " ha recibido 15 de daño");
         Debug.Log(_data.CurrentHealth);
     
     
         if (_data.CurrentHealth <= 0)
         {
-           Die();
-           Debug.Log("The " + _data.Name + " is Dead");
+            isAlive = false;
             
         }
     }
     
     public void Die()
     {
-        _isAlive = false;
+        _tookDamage = false;
+
+        playerAnimator.SetTrigger("Die");
+
+        Time.captureDeltaTime = 0;
     }
     
     

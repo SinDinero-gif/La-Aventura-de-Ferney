@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator _animator;
 
 
-    private float _moveSpeed = 4f;
-    private float _jumpForce = 6f;
+    public float _moveSpeed = 4f;
+    public float _jumpForce = 6f;
 
     [Header("Ground Check")]
     public Transform groundChekPos;   
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     private void Attack_performed(InputAction.CallbackContext context)
     {
         Debug.Log("Attacked");
-        if (_attacks._entityData.CanAttack && context.performed)
+        if (_attacks._playerData.CanAttack && context.performed)
         {
             _attacks.AttackInput();
         }

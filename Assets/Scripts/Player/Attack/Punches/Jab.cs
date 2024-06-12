@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Jab : MonoBehaviour, IAttack
 {
-    public EntityData _entityData;
+    public EntityData _playerData;
 
     [SerializeField] Transform attackPoint;
 
@@ -22,7 +22,7 @@ public class Jab : MonoBehaviour, IAttack
     private void Start()
     {
         attackCounter = 0;
-        _entityData.CanAttack = true;
+        _playerData.CanAttack = true;
         
     }
 
@@ -50,24 +50,24 @@ public class Jab : MonoBehaviour, IAttack
 
     private IEnumerator Attack2()
     {
-        _entityData.CanAttack = false;
+        _playerData.CanAttack = false;
         _playerAnimator.SetTrigger("Attack2");
 
         yield return new WaitForSeconds(0.23f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
 
-            enemy.GetComponent<Enemy>().TakeDamage(_entityData.PunchDamage + 5);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.PunchDamage + 5 + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
         }
 
         yield return new WaitForSeconds(0.35f);
 
         attackCounter = 0;
-        _entityData.CanAttack = true;
+        _playerData.CanAttack = true;
     }
 
     public IEnumerator Attack1()
@@ -77,18 +77,18 @@ public class Jab : MonoBehaviour, IAttack
 
         yield return new WaitForSeconds(0.23f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
             
-            enemy.GetComponent<Enemy>().TakeDamage(_entityData.PunchDamage);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.PunchDamage + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
         }
 
         yield return new WaitForSeconds(0.13f);
         
-        _entityData.CanAttack = true;
+        _playerData.CanAttack = true;
 
         yield return new WaitForSeconds(0.2f);
 
@@ -100,7 +100,7 @@ public class Jab : MonoBehaviour, IAttack
     {
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, _entityData.AttackRadius);
+        Gizmos.DrawSphere(attackPoint.position, _playerData.AttackRadius);
         
     }
 

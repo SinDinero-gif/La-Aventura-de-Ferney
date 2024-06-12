@@ -19,7 +19,7 @@ MonoBehaviour:
   _attackRadius: 0.7
   _canAttack: 1
   _maxHealth: 100
-  _currentHealth: -35
+  _currentHealth: 70
   enemyLayers:
     serializedVersion: 2
     m_Bits: 192
