@@ -55,8 +55,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Move_Performed(InputAction.CallbackContext context)
-    {
-        _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
+    {   
+        if(context.performed)
+        {
+            _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
+            print(_inputVector);
+        }
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -110,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
         _rb.velocity = new Vector3(_inputVector.x * _moveSpeed, _rb.velocity.y, _inputVector.y * _moveSpeed);
 
-        if (_inputVector.x != 0 && _inputVector.y != 0)
+        if (_inputVector.x != 0 || _inputVector.y != 0)
         {
             _player.playerAnimator.SetBool("Walking", true);
         }

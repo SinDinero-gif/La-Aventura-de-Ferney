@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour, IEntity
 
     [Header("Health")]
     private bool _isAlive = true;
-    private bool _tookDamage = false;
 
     private float _fillSpeed = 0.42f;
     [SerializeField] 
@@ -63,24 +62,14 @@ public class Enemy : MonoBehaviour, IEntity
 
     void Update()
     {
-        Distance = Vector3.Distance(transform.position, _playerTransform.position);
-        _animator.SetFloat("Distance",Distance);
-        
-        if (_tookDamage)
-        {
-            StartCoroutine(DamageAnim());
-        }
-
-        
-
-        if (_isAlive == false)
-        {
-            _data.CanAttack = false;
-            _tookDamage = false;
-            navMeshAgent.isStopped = true;
-
+        if (!_isAlive && Player.Instance.isAlive)
+        {   
             //Death Animation
             _animator.SetTrigger("Die");
+            _data.CanAttack = false;
+            navMeshAgent.isStopped = true;
+
+            
 
 
             //Disable the Enemy
@@ -88,38 +77,36 @@ public class Enemy : MonoBehaviour, IEntity
 
         }
 
+        if (!Player.Instance.isAlive || !_isAlive)
+        {
+            Distance = 100f;
+        } else
+        {
+            Distance = Vector3.Distance(transform.position, _playerTransform.position);
+        }
+        _animator.SetFloat("Distance",Distance);
+        
+
+        
+
         FlipSprite(_playerTransform.position);
 
         Movement();
 
-        if(Player.Instance.isAlive == false)
+        if (Distance <= 1f & _data.CanAttack)
         {
-            _animator.SetInteger("Active", 0);
-        }
-        else
-        {
-            _animator.SetInteger("Active", 1);
+            StartCoroutine(Attack());
+
         }
 
     }
 
     public void Movement()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
-
-        if (distanceToPlayer < followDistance) 
+        if (Distance < followDistance)
         {
             navMeshAgent.SetDestination(_playerTransform.position);
-
-            if (distanceToPlayer <= 1f & _data.CanAttack)
-            {
-                StartCoroutine(Attack());
-                
-            }
-
         }
-        
-
     }
 
     public IEnumerator Attack()
@@ -129,17 +116,15 @@ public class Enemy : MonoBehaviour, IEntity
         
         _animator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(0.4f);
-
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
 
         foreach (Collider player in hitEnemiesR)
         {
-            player.GetComponent<Player>().TakeDamage(_data.PunchDamage);
+            player.GetComponent<Player>().TakeDamage(_data.PunchDamage - 5);
             Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de da�o");
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         _data.CanAttack = true;
         
@@ -160,13 +145,15 @@ public class Enemy : MonoBehaviour, IEntity
 
     private IEnumerator DamageAnim()
     {
-        _animator.SetBool("Damaged", true);
         _data.CanAttack = false;
 
-        yield return new WaitForSeconds(2f);
 
-        _animator.SetBool("Damaged", false);
-        _tookDamage = false;
+        _animator.SetTrigger("Damaged");
+
+        yield return new WaitForSeconds(1.5f);
+
+        
+        
         _data.CanAttack = true;
     }
 
@@ -174,9 +161,9 @@ public class Enemy : MonoBehaviour, IEntity
     {
         Debug.Log(_data.Name + " ha sido herido");
 
+        StartCoroutine(DamageAnim());
+
         _data.CurrentHealth -= damage;
-        _tookDamage = true;
-        _animator.SetTrigger("Attack");
 
 
         float targetFillAmount = _data.CurrentHealth * 0.01f;
@@ -187,27 +174,17 @@ public class Enemy : MonoBehaviour, IEntity
 
         if (_data.CurrentHealth <= 0) 
         {
-            Die();
-            navMeshAgent.Stop();
+            _isAlive = false;
+            navMeshAgent.isStopped = true;
                      
         }
-
-    }
-
-    public void Die()
-    {
-        _isAlive = false;
-        
-
-        Debug.Log("The " + _data.Name + " is Dead");
-        
 
     }
 
     public IEnumerator EnemyDeath()
     {
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(8f);
 
         Destroy(gameObject);
     }

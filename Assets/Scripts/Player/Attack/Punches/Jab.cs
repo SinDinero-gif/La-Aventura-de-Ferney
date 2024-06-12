@@ -53,7 +53,6 @@ public class Jab : MonoBehaviour, IAttack
         _playerData.CanAttack = false;
         _playerAnimator.SetTrigger("Attack2");
 
-        yield return new WaitForSeconds(0.23f);
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
 
@@ -75,18 +74,16 @@ public class Jab : MonoBehaviour, IAttack
         attackCounter++;
         _playerAnimator.SetTrigger("Attack1"); 
 
-        yield return new WaitForSeconds(0.23f);
-
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
             
-            enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage);
+            enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage + 10);
             Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
         }
 
-        yield return new WaitForSeconds(0.13f);
+        yield return new WaitForSeconds(0.8f);
         
         _playerData.CanAttack = true;
 
