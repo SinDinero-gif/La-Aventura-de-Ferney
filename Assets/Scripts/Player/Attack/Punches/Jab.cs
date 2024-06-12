@@ -11,31 +11,41 @@ public class Jab : MonoBehaviour, IAttack
 
     [SerializeField] Animator _playerAnimator;
 
-    private int attackCounter;
+    [HideInInspector]
+    public int attackCounter;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
         attackCounter = 0;
         _entityData.CanAttack = true;
+        
     }
 
     private void Update()
     {      
 
-        if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack && attackCounter < 1)
+    }
+
+    public void AttackInput()
+    {
+        if(attackCounter < 1)
         {
             StartCoroutine(Attack1());
-            attackCounter++;
+            
             Debug.Log(attackCounter);
         }
-
-        if (Input.GetKeyDown(KeyCode.E) && _entityData.CanAttack && attackCounter >= 1)
+        else if(attackCounter >= 1) 
         {
             StartCoroutine(Attack2());
-            attackCounter = 0;
+            
             Debug.Log(attackCounter);
         }
-
+        
     }
 
     private IEnumerator Attack2()
@@ -54,12 +64,15 @@ public class Jab : MonoBehaviour, IAttack
             Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.PunchDamage + 5 + " of Damage.");
         }
 
-        yield return new WaitForSeconds(0.13f);
+        yield return new WaitForSeconds(0.35f);
+
+        attackCounter = 0;
+        _entityData.CanAttack = true;
     }
 
     public IEnumerator Attack1()
     {
-        
+        attackCounter++;
         _playerAnimator.SetTrigger("Attack1"); 
 
         yield return new WaitForSeconds(0.23f);
@@ -74,8 +87,12 @@ public class Jab : MonoBehaviour, IAttack
         }
 
         yield return new WaitForSeconds(0.13f);
-
+        
         _entityData.CanAttack = true;
+
+        yield return new WaitForSeconds(0.2f);
+
+        attackCounter = 0;
        
     }
 

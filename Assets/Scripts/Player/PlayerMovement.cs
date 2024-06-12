@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Jab _attacks;
+
     [SerializeField] private Player _player;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
 
 
     private float _moveSpeed = 4f;
-    [SerializeField] private float _jumpForce = 20f;
+    private float _jumpForce = 6f;
 
     [Header("Ground Check")]
     public Transform groundChekPos;   
@@ -31,8 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
         _playerInputActions = new PlayerInputs();
         _playerInputActions.Player.Enable();
-        _playerInputActions.Player.Move.performed += Move_performed;
+        _playerInputActions.Player.Move.performed += Move_Performed;
         _playerInputActions.Player.Jump.performed += Jump;
+        _playerInputActions.Player.Attack.performed += Attack_performed;
         
     }
 
@@ -42,15 +45,27 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Move_performed(InputAction.CallbackContext context)
+    private void Attack_performed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Attacked");
+        if (_attacks._entityData.CanAttack && context.performed)
+        {
+            _attacks.AttackInput();
+        }
+    }
+
+    private void Move_Performed(InputAction.CallbackContext context)
     {
         _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
     }
 
     private void Jump(InputAction.CallbackContext context)
     {
+        Debug.Log("Jump");
+
         if (IsGrounded() && context.performed)
         {
+            Debug.Log("Jumped");
             StartCoroutine(JumpMethod());
         }
     }
@@ -58,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator JumpMethod()
     {
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+
         _player.playerAnimator.SetBool("Jump", true);
 
         yield return new WaitForSeconds(0.3f);

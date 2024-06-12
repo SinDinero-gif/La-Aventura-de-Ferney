@@ -928,6 +928,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715375118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6473135842005483788, guid: bff2db06947182b4da923aa8e7554a61,
+    type: 3}
+  m_PrefabInstance: {fileID: 5344046275026214271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332761dfbb2e4e14fbe40d77481b2fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -6154,7 +6166,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541540802}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c258c63fa12f0c244971cf29cf0109b8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6190,7 +6202,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541540802}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c258c63fa12f0c244971cf29cf0109b8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6279,7 +6291,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719501937}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 091a2e84dd2081d4eb1dae9835b3a05e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -7839,11 +7851,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1735482692865280288, guid: bff2db06947182b4da923aa8e7554a61,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: c258c63fa12f0c244971cf29cf0109b8,
+        type: 2}
     - target: {fileID: 2694804572444653513, guid: bff2db06947182b4da923aa8e7554a61,
         type: 3}
       propertyPath: _gForce
       value: 9.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2694804572444653513, guid: bff2db06947182b4da923aa8e7554a61,
+        type: 3}
+      propertyPath: _attacks
+      value: 
+      objectReference: {fileID: 715375118}
     - target: {fileID: 2694804572444653513, guid: bff2db06947182b4da923aa8e7554a61,
         type: 3}
       propertyPath: _animator
@@ -7857,7 +7880,7 @@ PrefabInstance:
     - target: {fileID: 2694804572444653513, guid: bff2db06947182b4da923aa8e7554a61,
         type: 3}
       propertyPath: _jumpForce
-      value: 0.5
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2694804572444653513, guid: bff2db06947182b4da923aa8e7554a61,
         type: 3}
