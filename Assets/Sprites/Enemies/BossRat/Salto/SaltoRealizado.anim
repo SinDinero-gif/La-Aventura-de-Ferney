@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SaltoBoss
+  m_Name: SaltoRealizado
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 0a27db60624e9eb43bd7ee7311891f14, type: 3}
-    - time: 0.125
-      value: {fileID: 21300000, guid: d7061c6b33062d1498e2baf0c6dc360e, type: 3}
-    - time: 0.225
-      value: {fileID: 21300000, guid: 4db65d61056905046af27aef7db87c7a, type: 3}
-    - time: 0.35
-      value: {fileID: 21300000, guid: 790a5c0b44ae45243917754603b22a15, type: 3}
+      value: {fileID: 21300000, guid: cd97b78f7a465f54a8798b1ccf077050, type: 3}
+    - time: 0.2
+      value: {fileID: 21300000, guid: e2fee09ff9342064587bc173bfc62951, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +46,14 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 0a27db60624e9eb43bd7ee7311891f14, type: 3}
-    - {fileID: 21300000, guid: d7061c6b33062d1498e2baf0c6dc360e, type: 3}
-    - {fileID: 21300000, guid: 4db65d61056905046af27aef7db87c7a, type: 3}
-    - {fileID: 21300000, guid: 790a5c0b44ae45243917754603b22a15, type: 3}
+    - {fileID: 21300000, guid: cd97b78f7a465f54a8798b1ccf077050, type: 3}
+    - {fileID: 21300000, guid: e2fee09ff9342064587bc173bfc62951, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.375
+    m_StopTime: 0.22500001
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

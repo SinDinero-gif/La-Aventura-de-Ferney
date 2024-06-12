@@ -52354,9 +52354,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320836985777551152, guid: b05de2c4eab1dd14d855c58c68a49d15,
         type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: cf0f01fe7a5cacc47a41ea1ac11e1f1c,
+        type: 2}
+    - target: {fileID: 7320836985777551152, guid: b05de2c4eab1dd14d855c58c68a49d15,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 355777571}
+    - target: {fileID: 7320836985777551152, guid: b05de2c4eab1dd14d855c58c68a49d15,
+        type: 3}
+      propertyPath: ForceJump
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320836985777551152, guid: b05de2c4eab1dd14d855c58c68a49d15,
+        type: 3}
+      propertyPath: attackRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320836985777551152, guid: b05de2c4eab1dd14d855c58c68a49d15,
+        type: 3}
+      propertyPath: suelo.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7546883622618204317, guid: b05de2c4eab1dd14d855c58c68a49d15,
         type: 3}
       propertyPath: m_Name
