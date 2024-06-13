@@ -19,9 +19,6 @@ public class EntityData : ScriptableObject
     private int _kickDamage;
 
     [SerializeField]
-    private float _attackRadius;
-
-    [SerializeField]
     private bool _canAttack;
 
     [SerializeField]
@@ -62,12 +59,6 @@ public class EntityData : ScriptableObject
             if (_punchDamage > 80) { _punchDamage = 80; }
             else _punchDamage = value;
         }
-    }
-
-    public float AttackRadius
-    {
-        get => _attackRadius;
-        set {  _attackRadius = value; }
     }
 
     public LayerMask enemyLayers;

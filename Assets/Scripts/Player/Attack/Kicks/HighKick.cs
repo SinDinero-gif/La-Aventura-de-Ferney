@@ -50,6 +50,8 @@ public class HighKick : MonoBehaviour,IAttack
 
     [SerializeField] Transform attackPoint;
     [SerializeField] Animator animator;
+    [SerializeField]
+    private float _attackRadius;
 
     private void Start()
     {
@@ -72,7 +74,7 @@ public class HighKick : MonoBehaviour,IAttack
 
         yield return new WaitForSeconds(0.23f);
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _entityData.AttackRadius, _entityData.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _attackRadius, _entityData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
@@ -91,7 +93,7 @@ public class HighKick : MonoBehaviour,IAttack
     {
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, _entityData.AttackRadius);
+        Gizmos.DrawSphere(attackPoint.position, _attackRadius);
         
     }
 

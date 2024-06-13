@@ -14,6 +14,9 @@ public class Jab : MonoBehaviour, IAttack
     [HideInInspector]
     public int attackCounter;
 
+    [SerializeField]
+    private float _attackRadius;
+
     private void Awake()
     {
         
@@ -56,7 +59,7 @@ public class Jab : MonoBehaviour, IAttack
 
         PlayerMovement.Instance.canMove = false;
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _attackRadius, _playerData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
@@ -79,7 +82,7 @@ public class Jab : MonoBehaviour, IAttack
 
         PlayerMovement.Instance.canMove = false;
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _attackRadius, _playerData.enemyLayers);
 
         foreach (Collider enemy in hitEnemiesR)
         {
@@ -103,7 +106,7 @@ public class Jab : MonoBehaviour, IAttack
     {
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, _playerData.AttackRadius);
+        Gizmos.DrawSphere(attackPoint.position, _attackRadius);
         
     }
 
