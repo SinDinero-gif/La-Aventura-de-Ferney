@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
+using UnityEngine.UI;
+
 
 public class FinalBoss : MonoBehaviour, IEntity
 {
@@ -20,7 +19,7 @@ public class FinalBoss : MonoBehaviour, IEntity
    [SerializeField] private float ForceJump;
    [SerializeField] private float attackRange;
    [SerializeField] private Transform pointSpit;
-   
+   private bool _tookDamage = false;
    private bool _isAlive = true;
    private bool isGrounded = true;
    private bool canJump = true;
@@ -44,125 +43,48 @@ public class FinalBoss : MonoBehaviour, IEntity
       _meshAgent.updateRotation = false;
       _rb = GetComponent<Rigidbody>();
       player = GameObject.FindGameObjectWithTag("Player").transform;
-      //StartCoroutine(SpitAttack());
-
-
-
+      print(_data.Name + " salud inicial: " + _data.CurrentHealth);
+      
    }
 
    private void Update()
    {
-      
+      _data.CurrentHealth = Math.Clamp(_data.CurrentHealth, 0, _data.MaxHealth);
       isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, suelo);
       if(!_data.CanAttack || isAttacking || !isGrounded || !canJump) return;
-      //StartCoroutine(RandomAttack(randomIndex:5));
       StartCoroutine(JumpAttack());
    }
-
    
-   
-
-  
-
-
-
-
-
-   private IEnumerator RandomAttack(int randomIndex)
-   {
-      randomIndex = Random.Range(1, 5);
-      
-      int attackNumber = randomIndex;
-      switch (attackNumber)
-      {
-         case 0 :
-            yield return StartCoroutine(SpitAttack());
-            break;
-         case 1 :
-              yield return StartCoroutine(BurnAttack());
-            break;
-         case 2:
-            yield return StartCoroutine(BiteAttack());
-            break;
-            
-      }
-   }
-
-   public IEnumerator BurnAttack()
-   {
-      _data.CanAttack = false;
-        
-      //_animator.SetTrigger("Attack");
-
-      yield return new WaitForSeconds(1f);
-
-      Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
-
-      foreach (Collider player in hitEnemiesR)
-      {
-         player.GetComponent<Player>().TakeDamage(_data.BurnDamage);
-         
-      }
-
-      yield return new WaitForSeconds(1f);
-
-      _data.CanAttack = true;
-
-   }
-
-
-   
-   public IEnumerator SpitAttack()
-   {
-      while (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
-      {
-         _animator.SetBool("Vomito",true);
-         GameObject spit = Instantiate(bornPrefab, pointSpit.position, Quaternion.identity);
-         Rigidbody rb = spit.GetComponent<Rigidbody>();
-         Vector3 direction = (player.transform.position - transform.position).normalized;
-         Spit spitA = spit.AddComponent<Spit>();
-         spitA.damage = 10; 
-         rb.AddForce(direction * 1000);
-         yield return new WaitForSeconds(7f);
-         _animator.SetBool("Vomito",false);
-      }
-   }
-
       
    public void TakeDamage(int damage)
    {
       StartCoroutine(DamageAnim());
       _data.CurrentHealth -= damage;
+      _tookDamage = true;
+
+     
+      print(_data.Name + " ha recibido " + damage + " de daño");
+      print(_data.Name + " salud restante: " + _data.CurrentHealth);
       
-      if (_data.CurrentHealth <= 0) 
+    
+      if (_data.CurrentHealth <= 0)
       {
          _isAlive = false;
-         _meshAgent.isStopped = true;
-                     
+            
       }
-
    }
-   
+
    private IEnumerator DamageAnim()
    {
       _data.CanAttack = false;
-
-
-      _animator.SetTrigger("Damaged");
-
-      yield return new WaitForSeconds(1.5f);
-
-        
-        
+      
+      _animator.SetBool("Damage",true);
+      yield return new WaitForSeconds(0.20f);
+      _animator.SetBool("Damage", false);
       _data.CanAttack = true;
    }
+
    
-
-
-   private IEnumerator BiteAttack()
-   {
-      yield return new WaitForSeconds(5f);
-   }
 
    private IEnumerator JumpAttack()
    {

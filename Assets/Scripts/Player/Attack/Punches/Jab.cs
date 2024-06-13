@@ -10,6 +10,7 @@ public class Jab : MonoBehaviour, IAttack
     [SerializeField] Transform attackPoint;
 
     [SerializeField] Animator _playerAnimator;
+    
 
     [HideInInspector]
     public int attackCounter;
@@ -51,7 +52,7 @@ public class Jab : MonoBehaviour, IAttack
         
     }
 
-    private IEnumerator Attack2()
+     private IEnumerator Attack2()
     {
         _playerData.CanAttack = false;
         _playerAnimator.SetTrigger("Attack2");
@@ -63,9 +64,19 @@ public class Jab : MonoBehaviour, IAttack
 
         foreach (Collider enemy in hitEnemiesR)
         {
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            FinalBoss bossComponent = enemy.GetComponent<FinalBoss>();
 
-            enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
+            if (enemyComponent != null)
+            {
+                enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+            }
+            else if (bossComponent != null)
+            {
+                bossComponent.TakeDamage(_playerData.PunchDamage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+            }
         }
 
         yield return new WaitForSeconds(0.35f);
@@ -86,21 +97,37 @@ public class Jab : MonoBehaviour, IAttack
 
         foreach (Collider enemy in hitEnemiesR)
         {
+
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            FinalBoss bossComponent = enemy.GetComponent<FinalBoss>();
+
+            if (enemyComponent != null)
+            {
+                enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+            }
+            else if (bossComponent != null)
+            {
+                bossComponent.TakeDamage(_playerData.PunchDamage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+            }
+
             
             enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage + 10);
-            enemy.GetComponent<FinalBoss>().TakeDamage(_playerData.PunchDamage + 10);
             Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
+
         }
 
         yield return new WaitForSeconds(0.8f);
-        
+    
         _playerData.CanAttack = true;
 
         yield return new WaitForSeconds(0.2f);
 
         attackCounter = 0;
-       
     }
+
+
 
     private void OnDrawGizmosSelected()
     {

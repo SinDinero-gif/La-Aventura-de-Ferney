@@ -1396,7 +1396,7 @@ GameObject:
   - component: {fileID: 967253877}
   - component: {fileID: 967253879}
   - component: {fileID: 967253880}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1589,7 +1589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1025466206}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pointBite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2656,6 +2656,11 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6473135842005483788, guid: bff2db06947182b4da923aa8e7554a61,
+        type: 3}
+      propertyPath: _attackRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7558698659819678909, guid: bff2db06947182b4da923aa8e7554a61,
         type: 3}
       propertyPath: m_BoundingShape2D
@@ -2776,7 +2781,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786843602}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: spit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2992,7 +2997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5731182589432438181}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3078,7 +3083,7 @@ GameObject:
   - component: {fileID: 5130891353368997630}
   - component: {fileID: 3728537814359337486}
   - component: {fileID: 7546883622583260025}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RatBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
