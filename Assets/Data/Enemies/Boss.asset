@@ -18,7 +18,7 @@ MonoBehaviour:
   _jumpDamage: 20
   _biteDamage: 20
   _spitDamage: 20
-  _attackRadius: 0
+  _attackRadius: 3
   _currentHealth: 100
   _maxCurrentHealth: 100
   enemyLayers:
