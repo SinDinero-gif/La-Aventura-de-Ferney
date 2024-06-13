@@ -12,8 +12,6 @@ public class Player : MonoBehaviour, IEntity
     [Header("Health")]
     public bool isAlive = true;
     private bool _tookDamage = false;
-
-    [SerializeField] private Enemy _enemy;
     
     [Header("Health UI")]
     [SerializeField] private GameObject _healthBar;

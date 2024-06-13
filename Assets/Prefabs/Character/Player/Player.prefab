@@ -169,10 +169,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0ba2559543a5243b0ee3f4b632a08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 0}
   _attacks: {fileID: 6473135842005483788}
   _player: {fileID: 9112100160517449459}
   _spriteRenderer: {fileID: 1485016155555233116}
   _animator: {fileID: 455976795372835775}
+  canMove: 1
+  _moveSpeed: 4
+  _jumpForce: 6
   groundChekPos: {fileID: 4936666756585899553}
   groundLayer:
     serializedVersion: 2
@@ -223,7 +227,6 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
   _objectData: {fileID: 11400000, guid: 668a8f8bc531142548ac73b4584673e6, type: 2}
   isAlive: 1
-  _enemy: {fileID: 0}
   _healthBar: {fileID: 0}
   _empanada1: {fileID: 0}
   _empanada2: {fileID: 0}
@@ -328,6 +331,7 @@ GameObject:
   - component: {fileID: 9197905159134801083}
   - component: {fileID: 1485016155555233116}
   - component: {fileID: 455976795372835775}
+  - component: {fileID: 4828976388562799171}
   m_Layer: 9
   m_Name: Sprites
   m_TagString: Untagged
@@ -423,6 +427,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4828976388562799171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828279119381309034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66693e8051b4a324db5c73274197b905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4198225566567545000
 GameObject:
   m_ObjectHideFlags: 0

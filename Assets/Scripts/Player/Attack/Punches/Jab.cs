@@ -85,6 +85,7 @@ public class Jab : MonoBehaviour, IAttack
         {
             
             enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage + 10);
+            enemy.GetComponent<FinalBoss>().TakeDamage(_playerData.PunchDamage + 10);
             Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
         }
 
