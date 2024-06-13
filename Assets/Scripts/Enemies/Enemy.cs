@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] private Transform attackPoint;
     public NavMeshAgent navMeshAgent;
 
+    [SerializeField]
+    private float _attackRadius;
+
     [Header("SpriteManagement")]  
     [SerializeField] private SpriteRenderer _enemySprite;
 
@@ -111,12 +114,15 @@ public class Enemy : MonoBehaviour, IEntity
 
     public IEnumerator Attack()
     {
+
         Debug.Log(_data.Name + " ataca a Ferney!");
         _data.CanAttack = false;
         
         _animator.SetTrigger("Attack");
 
-        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _data.AttackRadius, _data.enemyLayers);
+        yield return new WaitForSeconds(1.6f);
+
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _attackRadius, _data.enemyLayers);
 
         foreach (Collider player in hitEnemiesR)
         {
@@ -193,7 +199,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
         
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, _data.AttackRadius);
+        Gizmos.DrawSphere(attackPoint.position, _attackRadius);
 
     }
 }
