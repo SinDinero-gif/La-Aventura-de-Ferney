@@ -22,7 +22,7 @@ public class AttackSpit : MonoBehaviour, IAttack
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) <= attackRange && !isAttacking)
+        if (Vector3.Distance(transform.position, player.transform.position) > attackRange && !isAttacking)
         {
             StartSpitAttack();
         }

@@ -21,6 +21,7 @@ public class FinalBoss : MonoBehaviour, IEntity
    [SerializeField] private float attackRange;
    [SerializeField] private Transform pointSpit;
    
+   private bool _isAlive = true;
    private bool isGrounded = true;
    private bool canJump = true;
    private bool isAttacking = false;
@@ -128,9 +129,33 @@ public class FinalBoss : MonoBehaviour, IEntity
    }
 
       
+   public void TakeDamage(int damage)
+   {
+      StartCoroutine(DamageAnim());
+      _data.CurrentHealth -= damage;
+      
+      if (_data.CurrentHealth <= 0) 
+      {
+         _isAlive = false;
+         _meshAgent.isStopped = true;
+                     
+      }
+
+   }
    
-   
- 
+   private IEnumerator DamageAnim()
+   {
+      _data.CanAttack = false;
+
+
+      _animator.SetTrigger("Damaged");
+
+      yield return new WaitForSeconds(1.5f);
+
+        
+        
+      _data.CanAttack = true;
+   }
    
 
 

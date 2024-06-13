@@ -1,13 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spit : MonoBehaviour
 {
-        public int damage = 10; 
+        private Animator _animator;
+        public int damage = 10;
 
-        void OnTriggerEnter(Collider other)
+        private void Start()
         {
+                _animator = GetComponent<Animator>();
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+                var other = collision.collider;
                 if (other.CompareTag("Player"))
                 {
                         Debug.Log("Proyectil ha colisionado con el jugador.");
@@ -17,8 +25,15 @@ public class Spit : MonoBehaviour
                                 player.TakeDamage(damage);
                                 Debug.Log("Daño aplicado: " + damage);
                         }
+                        Destroy(gameObject);
+                       
+                }
+                else if (other.CompareTag("Ground"))
+                {       
+                        _animator.SetTrigger("Ground"); 
                         Destroy(gameObject); 
                 }
+                
         }
 
 }
