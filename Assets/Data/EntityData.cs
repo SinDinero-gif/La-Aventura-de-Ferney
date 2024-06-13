@@ -29,14 +29,6 @@ public class EntityData : ScriptableObject
 
     [SerializeField]
     private int _currentHealth;
-
-    [Header("Sound Clips")]
-    [SerializeField] private AudioClip _idleSound;
-    [SerializeField] private AudioClip _attackSound;
-    [SerializeField] private AudioClip _damagedSound;
-    [SerializeField] private AudioClip _step1Sound;
-    [SerializeField] private AudioClip _step2Sound;
-    [SerializeField] private AudioClip _deathSound;
     
 
     public int Id
@@ -96,42 +88,6 @@ public class EntityData : ScriptableObject
     {
         get => _currentHealth;
         set { _currentHealth = value; }
-    }
-
-    public AudioClip IdleSound
-    {
-        get { return _idleSound; }
-        set { }
-    }
-    public AudioClip AttackSound
-    {
-        get { return _attackSound; }
-        set { }
-    }
-    public AudioClip IdleSound
-    {
-        get { return _idleSound; }
-        set { }
-    }
-    public AudioClip IdleSound
-    {
-        get { return _idleSound; }
-        set { }
-    }
-    public AudioClip IdleSound
-    {
-        get { return _idleSound; }
-        set { }
-    }
-    public AudioClip IdleSound
-    {
-        get { return _idleSound; }
-        set { }
-    }
-    public AudioClip IdleSound
-    {
-        get { return _idleSound; }
-        set { }
     }
 
 }

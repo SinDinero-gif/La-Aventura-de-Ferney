@@ -20,6 +20,10 @@ MonoBehaviour:
   _canAttack: 1
   _maxHealth: 100
   _currentHealth: 70
+  musicSound: []
+  sfxSound:
+  - name: Jump
+    clip: {fileID: 8300000, guid: 2d0f4ae5ac0d7e340a7c380cb742641b, type: 3}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 192

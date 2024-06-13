@@ -52,7 +52,9 @@ public class Jab : MonoBehaviour, IAttack
     {
         _playerData.CanAttack = false;
         _playerAnimator.SetTrigger("Attack2");
+        AudioManager.Instance.PlayPlayerSFX("Player Punch");
 
+        PlayerMovement.Instance.canMove = false;
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
 
@@ -72,7 +74,10 @@ public class Jab : MonoBehaviour, IAttack
     public IEnumerator Attack1()
     {
         attackCounter++;
-        _playerAnimator.SetTrigger("Attack1"); 
+        _playerAnimator.SetTrigger("Attack1");
+        AudioManager.Instance.PlayPlayerSFX("Player Punch");
+
+        PlayerMovement.Instance.canMove = false;
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _playerData.AttackRadius, _playerData.enemyLayers);
 

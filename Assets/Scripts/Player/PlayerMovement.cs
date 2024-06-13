@@ -5,13 +5,16 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private EntityData _playerData;
     [SerializeField] private Jab _attacks;
 
     [SerializeField] private Player _player;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
 
+    public static PlayerMovement Instance;
 
+    public bool canMove = true;
     public float _moveSpeed = 4f;
     public float _jumpForce = 6f;
 
@@ -36,7 +39,17 @@ public class PlayerMovement : MonoBehaviour
         _playerInputActions.Player.Move.performed += Move_Performed;
         _playerInputActions.Player.Jump.performed += Jump;
         _playerInputActions.Player.Attack.performed += Attack_performed;
-        
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     private void Start()
@@ -52,11 +65,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _attacks.AttackInput();
         }
+
+        
+
     }
 
     private void Move_Performed(InputAction.CallbackContext context)
     {   
-        if(context.performed)
+        if(canMove && context.performed)
         {
             _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
             print(_inputVector);
@@ -72,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Jumped");
             StartCoroutine(JumpMethod());
         }
+
+        AudioManager.Instance.PlayPlayerSFX("Player Jump");
     }
 
     private IEnumerator JumpMethod()
