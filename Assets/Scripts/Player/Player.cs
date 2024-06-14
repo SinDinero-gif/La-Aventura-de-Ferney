@@ -46,20 +46,25 @@ public class Player : MonoBehaviour, IEntity
     
     public void Update()
     {
-       _data.CurrentHealth = Math.Clamp(_data.CurrentHealth, 0, _data.MaxHealth);
+        _data.CurrentHealth = Math.Clamp(_data.CurrentHealth, 0, _data.MaxHealth);
 
         if (!isAlive)
         {
             Die();
             Debug.Log("The " + _data.Name + " is Dead");
-            Enemy.Instance.navMeshAgent.isStopped = true;
-
+            if (Enemy.Instance != null && Enemy.Instance.navMeshAgent != null)
+            {
+                Enemy.Instance.navMeshAgent.isStopped = true;
+            }
+            else
+            {
+                Debug.Log("Enemy.Instance o Enemy.Instance.navMeshAgent es null");
+            }
         }
         else
         {
-            
+            // ...
         }
-
     }
     
     
