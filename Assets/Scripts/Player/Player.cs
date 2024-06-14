@@ -67,6 +67,7 @@ public class Player : MonoBehaviour, IEntity
     {
         _data.CurrentHealth -= damage;
         _tookDamage = true;
+        playerAnimator.SetTrigger("Damaged");
 
         Debug.Log(_data.Name + " ha recibido 15 de daño");
         Debug.Log(_data.CurrentHealth);
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour, IEntity
 
         playerAnimator.SetTrigger("Die");
 
-        Time.captureDeltaTime = 0;
+        
     }
     
     

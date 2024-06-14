@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         _playerInputActions.Player.Move.performed += Move_Performed;
         _playerInputActions.Player.Jump.performed += Jump;
         _playerInputActions.Player.Attack.performed += Attack_performed;
+        _playerInputActions.Player.Special.performed += Special_performed;
 
         if (Instance == null)
         {
@@ -55,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         
+    }
+
+    private void Special_performed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Special");
+        if (_attacks._playerData.CanAttack && context.performed)
+        {
+            _attacks.SpecialInput();
+        }
     }
 
 
@@ -75,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         if(canMove && context.performed)
         {
             _inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
-            print(_inputVector);
+            
         }
     }
 
@@ -89,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpMethod());
         }
 
-        AudioManager.Instance.PlayPlayerSFX("Player Jump");
+        
     }
 
     private IEnumerator JumpMethod()
@@ -97,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
         _player.playerAnimator.SetBool("Jump", true);
+        AudioManager.Instance.PlayPlayerSFX("Player Jump");
 
         yield return new WaitForSeconds(0.3f);
 

@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+public enum EnemyType
+{
+    Rat,
+    Kukaracha
+}
+
 public class Enemy : MonoBehaviour, IEntity
 {
    
@@ -13,6 +19,8 @@ public class Enemy : MonoBehaviour, IEntity
 
     [Header("Health")]
     private bool _isAlive = true;
+
+    public EnemyType enemyType;
 
     private float _fillSpeed = 0.42f;
     [SerializeField] 
@@ -57,7 +65,7 @@ public class Enemy : MonoBehaviour, IEntity
         _data.CurrentHealth = _data.MaxHealth;
         _data.CanAttack = true;
         
-        _healthBar.fillAmount = _data.CurrentHealth * _data.MaxHealth;
+        _healthBar.fillAmount = _data.CurrentHealth / _data.MaxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
@@ -65,20 +73,6 @@ public class Enemy : MonoBehaviour, IEntity
 
     void Update()
     {
-        if (!_isAlive && Player.Instance.isAlive)
-        {   
-            //Death Animation
-            _animator.SetTrigger("Die");
-            _data.CanAttack = false;
-            navMeshAgent.isStopped = true;
-
-            
-
-
-            //Disable the Enemy
-            StartCoroutine(EnemyDeath());
-
-        }
 
         if (!Player.Instance.isAlive || !_isAlive)
         {
@@ -120,6 +114,15 @@ public class Enemy : MonoBehaviour, IEntity
         
         _animator.SetTrigger("Attack");
 
+        if(enemyType == EnemyType.Rat)
+        {
+            AudioManager.Instance.PlayEnemySFX("Rata Attack");
+
+        }else if(enemyType == EnemyType.Kukaracha)
+        {
+            AudioManager.Instance.PlayEnemySFX("Kukaracha Attack");
+        }
+
         yield return new WaitForSeconds(1.6f);
 
         Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _attackRadius, _data.enemyLayers);
@@ -127,6 +130,7 @@ public class Enemy : MonoBehaviour, IEntity
         foreach (Collider player in hitEnemiesR)
         {
             player.GetComponent<Player>().TakeDamage(_data.PunchDamage - 5);
+            AudioManager.Instance.PlayPlayerSFX("Player Hurt");
             Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de da�o");
         }
 
@@ -152,6 +156,16 @@ public class Enemy : MonoBehaviour, IEntity
     private IEnumerator DamageAnim()
     {
         _data.CanAttack = false;
+
+        if (enemyType == EnemyType.Rat)
+        {
+            AudioManager.Instance.PlayEnemySFX("Rata Damaged");
+
+        }
+        else if (enemyType == EnemyType.Kukaracha)
+        {
+            AudioManager.Instance.PlayEnemySFX("Kukaracha Damaged");
+        }
 
 
         _animator.SetTrigger("Damaged");
@@ -180,15 +194,26 @@ public class Enemy : MonoBehaviour, IEntity
 
         if (_data.CurrentHealth <= 0) 
         {
-            _isAlive = false;
+            _data.CanAttack = false;
             navMeshAgent.isStopped = true;
-                     
+            StartCoroutine(EnemyDeath());
         }
 
     }
 
     public IEnumerator EnemyDeath()
     {
+        _animator.SetTrigger("Die");
+
+        if (enemyType == EnemyType.Rat)
+        {
+            AudioManager.Instance.PlayEnemySFX("Rata Die");
+
+        }
+        else if (enemyType == EnemyType.Kukaracha)
+        {
+            AudioManager.Instance.PlayEnemySFX("Kukaracha Die");
+        }
 
         yield return new WaitForSeconds(8f);
 
