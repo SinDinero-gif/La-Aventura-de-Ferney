@@ -19,6 +19,7 @@ public class FinalBoss : MonoBehaviour, IEntity
    [SerializeField] private float ForceJump;
    [SerializeField] private float attackRange;
    [SerializeField] private Transform pointSpit;
+   [SerializeField] private BarraDeVidaBoss _barraDeVidaBoss;
    private bool _tookDamage = false;
    private bool _isAlive = true;
    private bool isGrounded = true;
@@ -43,6 +44,8 @@ public class FinalBoss : MonoBehaviour, IEntity
       _meshAgent.updateRotation = false;
       _rb = GetComponent<Rigidbody>();
       player = GameObject.FindGameObjectWithTag("Player").transform;
+      _barraDeVidaBoss.InicializarBarra(_data.CurrentHealth);
+      _barraDeVidaBoss.ChangeCurrentLife(_data.CurrentHealth);
       print(_data.Name + " salud inicial: " + _data.CurrentHealth);
       
    }
@@ -58,6 +61,7 @@ public class FinalBoss : MonoBehaviour, IEntity
       
    public void TakeDamage(int damage)
    {
+      _barraDeVidaBoss.ChangeCurrentLife(_data.CurrentHealth);
       StartCoroutine(DamageAnim());
       _data.CurrentHealth -= damage;
       _tookDamage = true;
