@@ -17,8 +17,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Animator _book;
 
     [SerializeField] GameObject _playButton;
-
-    [SerializeField] Animator _titles;
     
 
     private bool buttons;
@@ -59,7 +57,7 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator ComicTransition2()
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(3.6f);
 
         _playButton.SetActive(true);
 
@@ -70,8 +68,8 @@ public class MenuManager : MonoBehaviour
     public void MenuUpdate1(int State)
     {
         _book.SetInteger("State", State);
-        _titles.SetInteger("State", State);
         _buttons.SetActive(false);
+        _render.SetInteger("State", State);
     }
 
     public void BookPage()

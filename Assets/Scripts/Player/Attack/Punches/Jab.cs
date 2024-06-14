@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using MoreMountains.Feedbacks;
 
 public class Jab : MonoBehaviour, IAttack
 {
     public EntityData _playerData;
-
-    [SerializeField] private MMF_Player _timeFeedback;
 
     [SerializeField] Transform attackPoint;
 
@@ -76,13 +73,11 @@ public class Jab : MonoBehaviour, IAttack
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
-                _timeFeedback.PlayFeedbacks();
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
             {
                 bossComponent.TakeDamage(_playerData.PunchDamage + 10);
-                _timeFeedback.PlayFeedbacks();
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
             }
 
@@ -113,13 +108,11 @@ public class Jab : MonoBehaviour, IAttack
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
-                _timeFeedback.PlayFeedbacks();
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
             {
                 bossComponent.TakeDamage(_playerData.PunchDamage + 10);
-                _timeFeedback.PlayFeedbacks();
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
             }
 

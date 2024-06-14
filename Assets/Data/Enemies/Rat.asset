@@ -16,10 +16,10 @@ MonoBehaviour:
   _name: Rata de Bolivar
   _punchDamage: 15
   _kickDamage: 0
-  _attackRadius: 0.8
   _canAttack: 0
   _maxHealth: 75
   _currentHealth: 75
+  _isAlive: 0
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
