@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class Jab : MonoBehaviour, IAttack
 {
     public EntityData _playerData;
+
+    [SerializeField] private MMF_Player _timeFeedback;
 
     [SerializeField] Transform attackPoint;
 
@@ -52,7 +55,47 @@ public class Jab : MonoBehaviour, IAttack
         
     }
 
-     private IEnumerator Attack2()
+    public void SpecialInput()
+    {
+        StartCoroutine(Special());
+    }
+
+    private IEnumerator Special()
+    {
+        _playerData.CanAttack = false;
+        _playerAnimator.SetTrigger("SpecialAttack");
+        
+
+        Collider[] hitEnemiesR = Physics.OverlapSphere(attackPoint.position, _attackRadius, _playerData.enemyLayers);
+
+        foreach (Collider enemy in hitEnemiesR)
+        {
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            FinalBoss bossComponent = enemy.GetComponent<FinalBoss>();
+
+            if (enemyComponent != null)
+            {
+                enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
+                _timeFeedback.PlayFeedbacks();
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+            }
+            else if (bossComponent != null)
+            {
+                bossComponent.TakeDamage(_playerData.PunchDamage + 10);
+                _timeFeedback.PlayFeedbacks();
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+            }
+
+        }
+
+        yield return new WaitForSeconds(0.35f);
+
+        attackCounter = 0;
+        _playerData.CanAttack = true;
+
+    }
+
+    private IEnumerator Attack2()
     {
         _playerData.CanAttack = false;
         _playerAnimator.SetTrigger("Attack2");
@@ -70,13 +113,16 @@ public class Jab : MonoBehaviour, IAttack
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
+                _timeFeedback.PlayFeedbacks();
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
             {
                 bossComponent.TakeDamage(_playerData.PunchDamage + 10);
+                _timeFeedback.PlayFeedbacks();
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
             }
+
         }
 
         yield return new WaitForSeconds(0.35f);
