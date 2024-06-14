@@ -39,7 +39,7 @@ public class AttackBite : MonoBehaviour
         }
         
         _animator.SetBool("BiteAttack",false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         _data.CanAttack = true;
     }

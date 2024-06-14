@@ -26,7 +26,8 @@ public class EntityData : ScriptableObject
 
     [SerializeField]
     private int _currentHealth;
-    
+
+    public bool _isAlive;
 
     public int Id
     {
@@ -80,5 +81,22 @@ public class EntityData : ScriptableObject
         get => _currentHealth;
         set { _currentHealth = value; }
     }
+    
+    public void ModifyHealth(int vida)
+    {
+        _currentHealth += vida;
+    
+        
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
+        if (_currentHealth <= 0)
+        {
+            _isAlive = false;
+        }
+    }
+    
+   
 }
+
+
+

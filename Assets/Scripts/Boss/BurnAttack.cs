@@ -40,7 +40,7 @@ public class BurnAttack : MonoBehaviour
         }
         
         _animator.SetBool("Attack",false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         _data.CanAttack = true;
     }

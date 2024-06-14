@@ -70,6 +70,7 @@ public class FinalBoss : MonoBehaviour, IEntity
       if (_data.CurrentHealth <= 0)
       {
          _isAlive = false;
+         Destroy(gameObject);
             
       }
    }
