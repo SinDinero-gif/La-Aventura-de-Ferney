@@ -11,6 +11,8 @@ public class Jab : MonoBehaviour, IAttack
 
     [SerializeField] Animator _playerAnimator;
     
+    
+    
 
     [HideInInspector]
     public int attackCounter;

@@ -87,12 +87,19 @@ public class Player : MonoBehaviour, IEntity
     
     public void Die()
     {
+        Debug.Log("me mori");
         _tookDamage = false;
 
         playerAnimator.SetTrigger("Die");
 
         
     }
-    
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ZoneDead"))
+        {
+            Die();
+        }
+    }
 }
