@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour, IEntity
 {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour, IEntity
 
     [Header("Animation")]
     public Animator playerAnimator;
+    
+    public GameObject gameOverPanel;
 
     private static Player _instance;
     public static Player Instance => _instance;
@@ -32,6 +35,8 @@ public class Player : MonoBehaviour, IEntity
     private void Start()
     {
         _data.CurrentHealth = _data.MaxHealth;
+        
+        gameOverPanel.SetActive(false);
         
     }
     
@@ -91,7 +96,7 @@ public class Player : MonoBehaviour, IEntity
 
     public void Die()
     {
-        SceneManager.LoadScene("Game Over");
+        gameOverPanel.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
