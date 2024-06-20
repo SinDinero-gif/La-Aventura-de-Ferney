@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IEntity
 {
@@ -13,20 +15,8 @@ public class Player : MonoBehaviour, IEntity
     public bool isAlive = true;
     private bool _tookDamage = false;
     
-    [Header("Health UI")]
-    [SerializeField] private GameObject _healthBar;
-    [SerializeField] Image _empanada1;
-    [SerializeField] Image _empanada2;
-    [SerializeField] Image _empanada3;
-    
-    [Header("Player UI Management")]
-    [SerializeField] Sprite _empanadaFull;
-    [SerializeField] Sprite _empanadaHalf;
-    [SerializeField] Sprite _empanadaEmpty;
-    
     [Header("SpriteManagement")]
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
-    public SpriteRenderer playerSpriteRenderer => _playerSpriteRenderer;
 
     [Header("Animation")]
     public Animator playerAnimator;
@@ -42,6 +32,7 @@ public class Player : MonoBehaviour, IEntity
     private void Start()
     {
         _data.CurrentHealth = _data.MaxHealth;
+        
     }
     
     public void Update()
@@ -50,7 +41,7 @@ public class Player : MonoBehaviour, IEntity
 
         if (!isAlive)
         {
-            Die();
+            StartCoroutine(DieAnimation());
             Debug.Log("The " + _data.Name + " is Dead");
             if (Enemy.Instance != null && Enemy.Instance.navMeshAgent != null)
             {
@@ -80,19 +71,27 @@ public class Player : MonoBehaviour, IEntity
     
         if (_data.CurrentHealth <= 0)
         {
-            isAlive = false;
-            
+            StartCoroutine(DieAnimation());
+            _data.CanAttack = false;
+
         }
     }
     
-    public void Die()
+    private IEnumerator DieAnimation()
     {
-        Debug.Log("me mori");
+        Debug.Log("Mataron a Ferney! Hijos de Puta!");
         _tookDamage = false;
 
         playerAnimator.SetTrigger("Die");
-
+        yield return new WaitForSeconds(3f);
         
+        Die();
+
+    }
+
+    public void Die()
+    {
+        SceneManager.LoadScene("Game Over");
     }
 
     private void OnTriggerEnter(Collider other)

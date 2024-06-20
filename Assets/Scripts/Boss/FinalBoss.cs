@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class FinalBoss : MonoBehaviour, IEntity
 {
    [Header("Data")]
-   [SerializeField] private DataBoss _data;
+   public DataBoss _data;
    
    [Header("IA")]
    [SerializeField] private Transform player;

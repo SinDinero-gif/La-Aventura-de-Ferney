@@ -8,7 +8,7 @@ public class SceneChangeLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene("SamuelScene 1");
+        SceneManager.LoadScene("SamuelScene1");
     }
 
     

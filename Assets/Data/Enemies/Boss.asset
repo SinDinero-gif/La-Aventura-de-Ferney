@@ -19,8 +19,8 @@ MonoBehaviour:
   _biteDamage: 20
   _spitDamage: 20
   _attackRadius: 3
-  _currentHealth: 840
-  _maxCurrentHealth: 1000
+  _currentHealth: 200
+  _maxCurrentHealth: 200
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
