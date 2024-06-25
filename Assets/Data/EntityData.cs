@@ -6,35 +6,37 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Entity", menuName = "DataBlocks/Entities", order = 1)]
 public class EntityData : ScriptableObject
 {
-    [SerializeField]
-    private int _id;
 
     [SerializeField]
     private string _name;
 
     [SerializeField]
-    private int _punchDamage;
+    private float _maxHealth;
 
     [SerializeField]
-    private int _kickDamage;
+    private float _currentHealth;
+
+    [SerializeField]
+    private int _damage;
+
+    [SerializeField]
+    private float _speed;
 
     [SerializeField]
     private bool _canAttack;
 
     [SerializeField]
-    private int _maxHealth;
+    private float _chaseRange;
 
     [SerializeField]
-    private int _currentHealth;
+    private float _attackRange;
 
-    public bool _isAlive;
+    [SerializeField]
+    private float _attackSpeed;
 
-    public int Id
-    {
-        get => _id;
-        set => _id = value;
-        
-    }
+
+
+    public LayerMask enemyLayers;
 
     public string Name
     {
@@ -42,60 +44,61 @@ public class EntityData : ScriptableObject
         set { _name = value; }
     }
 
-    public int PunchDamage
+
+    public float MaxHealth
     {
-        get => _punchDamage;
+        get => _maxHealth;
+        set { _maxHealth = value; }
+    }
+
+    public float CurrentHealth
+    {
+        get => _currentHealth;
+        set { _currentHealth = value; }
+    }
+
+    public int Damage
+    {
+        get => _damage;
         set
         {   
-            if (_punchDamage > 50) { _punchDamage = 50; }
-            else _punchDamage = value;
+            if (_damage > 50) { _damage = 50; }
+            else _damage = value;
         }
     }
 
-    public int KickDamage
+    public float Speed
     {
-        get => _punchDamage;
-        set
-        {
-            if (_punchDamage > 80) { _punchDamage = 80; }
-            else _punchDamage = value;
-        }
+        get => _speed;
+        set => _speed = value;
     }
-
-    public LayerMask enemyLayers;
 
     public bool CanAttack
     {
         get => _canAttack;
         set { _canAttack = value; }
     }
-
-    public int MaxHealth
+    public float ChaseRange
     {
-        get => _maxHealth;
-        set { _maxHealth = value; }
+        get => _chaseRange;
+        set => _chaseRange = value;
     }
 
-    public int CurrentHealth
+    public float AttackRange
     {
-        get => _currentHealth;
-        set { _currentHealth = value; }
+        get => _attackRange;
+        set => _attackRange = value;
     }
-    
-    public void ModifyHealth(int vida)
-    {
-        _currentHealth += vida;
-    
-        
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
-        if (_currentHealth <= 0)
-        {
-            _isAlive = false;
-        }
+
+    public float AttackSpeed
+    {
+        get => _attackSpeed;
+        set => _attackSpeed = value;
     }
-    
-   
+
+
+
 }
 
 

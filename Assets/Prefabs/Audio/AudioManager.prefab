@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 3135163036881715394}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3,
+  OutputAudioMixerGroup: {fileID: -7023544107086561659, guid: 9f52deb598245e24ab2e01bb1fb6aab6,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -170,13 +170,13 @@ AudioSource:
   m_GameObject: {fileID: 3660937386718792849}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -2273146209696275378, guid: 7e984f512e89b60468e829489e8883e3,
+  OutputAudioMixerGroup: {fileID: 7381643064048082460, guid: 9f52deb598245e24ab2e01bb1fb6aab6,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -299,7 +299,7 @@ AudioSource:
   m_GameObject: {fileID: 4857525297013449158}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3,
+  OutputAudioMixerGroup: {fileID: -7023544107086561659, guid: 9f52deb598245e24ab2e01bb1fb6aab6,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -434,7 +434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d1b5831c974ec14aa2d47542328aedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSound: []
+  musicSound:
+  - name: Level Music
+    clip: {fileID: 8300000, guid: ed23f8e919493224bbad03d12db1eccb, type: 3}
   playerSfxSound:
   - name: Player Jump
     clip: {fileID: 8300000, guid: 2d0f4ae5ac0d7e340a7c380cb742641b, type: 3}
@@ -444,7 +446,33 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5b0ef48f13e830c48a19bf3a44d3130c, type: 3}
   - name: Player Step 2
     clip: {fileID: 8300000, guid: a951061f55d23a24186ff4da5d62073c, type: 3}
-  enemySfxSound: []
+  - name: Player Special
+    clip: {fileID: 8300000, guid: a878672d4701b404ab2e5dff65d5bd6b, type: 3}
+  - name: Player Hurt
+    clip: {fileID: 8300000, guid: b0b722c602f05c3468ca20db28f39835, type: 3}
+  - name: Player Item
+    clip: {fileID: 8300000, guid: 51cac9d33746c5142833a03a218a827f, type: 3}
+  enemySfxSound:
+  - name: Kukaracha Damaged
+    clip: {fileID: 8300000, guid: db36cdd647eb0c94e915164658b474bc, type: 3}
+  - name: Kukaracha Step1
+    clip: {fileID: 8300000, guid: 13c915e5fc1ee424e893bb31dd04873c, type: 3}
+  - name: Kukaracha Step2
+    clip: {fileID: 8300000, guid: cc2fb1344a10a3944a5f6cf8a5bd982c, type: 3}
+  - name: Kukaracha Attack
+    clip: {fileID: 8300000, guid: ed560506c9dfdc14aae0d6f8cbafbd98, type: 3}
+  - name: Kukaracha Die
+    clip: {fileID: 8300000, guid: facbcffe5667f8b4997a4a917e5264a9, type: 3}
+  - name: Rata Damaged
+    clip: {fileID: 8300000, guid: 33abcb9513b68364eb381139e20b5f74, type: 3}
+  - name: Rata Step1
+    clip: {fileID: 8300000, guid: b3e23ac236e0e934492156aeb50b34a2, type: 3}
+  - name: Rata Step2
+    clip: {fileID: 8300000, guid: d8ad2a22dae894b4a9a0efedee54dc67, type: 3}
+  - name: Rata Attack
+    clip: {fileID: 8300000, guid: c32fa94e89a6e2c4587deebc56627e0c, type: 3}
+  - name: Rata Die
+    clip: {fileID: 8300000, guid: e2062e506953805458514c0ee685245e, type: 3}
   musicSource: {fileID: 1665111750629726886}
   playerSfxSource: {fileID: 8844207542098709158}
   enemySfxSource: {fileID: 3316620579648980682}

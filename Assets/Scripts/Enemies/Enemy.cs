@@ -5,12 +5,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public enum EnemyType
-{
-    Rat,
-    Kukaracha
-}
-
 public class Enemy : MonoBehaviour, IEntity
 {
    
@@ -114,7 +108,7 @@ public class Enemy : MonoBehaviour, IEntity
         
         _animator.SetTrigger("Attack");
 
-        if(enemyType == EnemyType.Rat)
+        if(enemyType == EnemyType.Rata)
         {
             AudioManager.Instance.PlayEnemySFX("Rata Attack");
 
@@ -129,9 +123,9 @@ public class Enemy : MonoBehaviour, IEntity
 
         foreach (Collider player in hitEnemiesR)
         {
-            player.GetComponent<Player>().TakeDamage(_data.PunchDamage - 5);
+            player.GetComponent<Player>().TakeDamage(_data.Damage - 5);
             AudioManager.Instance.PlayPlayerSFX("Player Hurt");
-            Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.PunchDamage + " de da�o");
+            Debug.Log(_data.Name + " ha atacado a Ferney!, haciendo " + _data.Damage + " de da�o");
         }
 
         yield return new WaitForSeconds(3f);
@@ -157,7 +151,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
         _data.CanAttack = false;
 
-        if (enemyType == EnemyType.Rat)
+        if (enemyType == EnemyType.Rata)
         {
             AudioManager.Instance.PlayEnemySFX("Rata Damaged");
 
@@ -205,7 +199,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
         _animator.SetTrigger("Die");
 
-        if (enemyType == EnemyType.Rat)
+        if (enemyType == EnemyType.Rata)
         {
             AudioManager.Instance.PlayEnemySFX("Rata Die");
 

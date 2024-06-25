@@ -17,7 +17,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Animator _book;
 
     [SerializeField] GameObject _playButton;
-    
+
+    [SerializeField] GameObject _settingsPanel;
+
 
     private bool buttons;
     private int bookPage;
@@ -28,8 +30,11 @@ public class MenuManager : MonoBehaviour
         bookPage = 0;
         _playButton.SetActive(false);
         _buttons.SetActive(false);
+        _settingsPanel.SetActive(false);
 
     }
+
+    
 
     public void Update()
     {
@@ -75,6 +80,22 @@ public class MenuManager : MonoBehaviour
     public void BookPage()
     {
         bookPage++;
+    }
+
+    public void SettingsWindow()
+    {
+
+        _settingsPanel.SetActive(true); 
+    }
+
+    public void GoBack()
+    {
+        _settingsPanel.SetActive(false);
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 
     public void Play(int Scene)

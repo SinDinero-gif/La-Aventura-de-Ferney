@@ -8,7 +8,7 @@ public class EnemyAnimationEventPlayer : MonoBehaviour
 
     public void Step1()
     {
-        if (enemyType == EnemyType.Rat)
+        if (enemyType == EnemyType.Rata)
         {
             AudioManager.Instance.PlayEnemySFX("Rata Step1");
 
@@ -21,7 +21,7 @@ public class EnemyAnimationEventPlayer : MonoBehaviour
 
     public void Step2()
     {
-        if (enemyType == EnemyType.Rat)
+        if (enemyType == EnemyType.Rata)
         {
             AudioManager.Instance.PlayEnemySFX("Rata Step2");
 

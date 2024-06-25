@@ -15,7 +15,7 @@ public class Empanada : MonoBehaviour
             Player data = other.gameObject.GetComponent<Player>();
             if (data != null)
             {
-                data._data.ModifyHealth(vida);
+                data._data.CurrentHealth += vida; 
                 Destroy(gameObject);
             }
             

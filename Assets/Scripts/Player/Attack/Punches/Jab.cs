@@ -74,13 +74,13 @@ public class Jab : MonoBehaviour, IAttack
 
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
-                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+                enemyComponent.TakeDamage(_playerData.Damage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
             {
-                bossComponent.TakeDamage(_playerData.PunchDamage + 10);
-                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+                bossComponent.TakeDamage(_playerData.Damage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
 
         }
@@ -109,13 +109,13 @@ public class Jab : MonoBehaviour, IAttack
 
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
-                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+                enemyComponent.TakeDamage(_playerData.Damage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
             {
-                bossComponent.TakeDamage(_playerData.PunchDamage + 10);
-                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+                bossComponent.TakeDamage(_playerData.Damage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
 
         }
@@ -144,18 +144,18 @@ public class Jab : MonoBehaviour, IAttack
 
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(_playerData.PunchDamage + 10);
-                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+                enemyComponent.TakeDamage(_playerData.Damage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
             {
-                bossComponent.TakeDamage(_playerData.PunchDamage + 10);
-                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.PunchDamage + 10) + " of Damage.");
+                bossComponent.TakeDamage(_playerData.Damage + 10);
+                Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
 
             
-            enemy.GetComponent<Enemy>().TakeDamage(_playerData.PunchDamage + 10);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.PunchDamage + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_playerData.Damage + 10);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.Damage + " of Damage.");
 
         }
 

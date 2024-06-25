@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432ac5d152162b04b876c34ff9191eb8, type: 3}
   m_Name: Rat
   m_EditorClassIdentifier: 
-  _id: 3
   _name: Rata de Bolivar
-  _punchDamage: 15
-  _kickDamage: 0
-  _canAttack: 0
   _maxHealth: 75
-  _currentHealth: 75
-  _isAlive: 0
+  _currentHealth: 0
+  _damage: 10
+  _speed: 6
+  _canAttack: 1
+  _chaseRange: 5
+  _attackRange: 2
+  _attackSpeed: 4
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512

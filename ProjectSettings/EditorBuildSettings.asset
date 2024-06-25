@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Load Scene 1.unity
     guid: 134979d5fafe8b8418cbb5628282a4e9
   - enabled: 1
-    path: Assets/Scenes/SamuelScene1.unity
-    guid: 9f350ee84bb74d14ba78313d207072f6
+    path: Assets/Scenes/SamuelScene.unity
+    guid: 11fb3e9ed6d44244582a65cd31c04747
   - enabled: 1
     path: Assets/Scenes/Load Scene 2.unity
     guid: 25c8a9845a17ee646b786070126dd7e3
@@ -21,9 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/BossScene.unity
     guid: 4df720585f372014dbff9baec2df862c
   - enabled: 1
-    path: Assets/Scenes/Game Over.unity
-    guid: 3690bc241a41d934d919b38dabeb2fe6
-  - enabled: 1
-    path: Assets/Scenes/SamuelScene.unity
-    guid: 11fb3e9ed6d44244582a65cd31c04747
+    path: Assets/Scenes/End Scene.unity
+    guid: 809a1e23ae943584da9ace87ce7ae106
   m_configObjects: {}

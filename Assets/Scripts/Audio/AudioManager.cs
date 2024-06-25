@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -25,7 +26,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayMusic("Level Music");
+        PlayMusic("Menu Music");
     }
     void PlayMusic(string name)
     {

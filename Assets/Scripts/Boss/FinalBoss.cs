@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -75,11 +76,16 @@ public class FinalBoss : MonoBehaviour, IEntity
       {
          _isAlive = false;
          Destroy(gameObject);
-            
+            Die();
       }
    }
 
-   private IEnumerator DamageAnim()
+    private void Die()
+    {
+        SceneManager.LoadScene("End Scene");
+    }
+
+    private IEnumerator DamageAnim()
    {
       _data.CanAttack = false;
       
@@ -125,6 +131,6 @@ public class FinalBoss : MonoBehaviour, IEntity
       Gizmos.DrawWireSphere(transform.position, groundCheckDistance);
    }
    
- 
+    
 
 }

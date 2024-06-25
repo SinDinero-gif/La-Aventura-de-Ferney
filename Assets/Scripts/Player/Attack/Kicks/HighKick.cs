@@ -79,8 +79,8 @@ public class HighKick : MonoBehaviour,IAttack
         foreach (Collider enemy in hitEnemiesR)
         {
 
-            enemy.GetComponent<Enemy>().TakeDamage(_entityData.KickDamage + 5);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.KickDamage + 5 + " of Damage.");
+            enemy.GetComponent<Enemy>().TakeDamage(_entityData.Damage + 5);
+            Debug.Log("The " + enemy.name + " was hit, dealing " + _entityData.Damage + 5 + " of Damage.");
         }
 
         yield return new WaitForSeconds(0.17f);
