@@ -10,9 +10,12 @@ public class Jab : MonoBehaviour, IAttack
     [SerializeField] Transform attackPoint;
 
     [SerializeField] Animator _playerAnimator;
-    
-    
-    
+
+    public EnemyStateMachine _enemy;
+
+    private Jab instance;
+
+    internal Jab Instance => instance;
 
     [HideInInspector]
     public int attackCounter;
@@ -20,10 +23,7 @@ public class Jab : MonoBehaviour, IAttack
     [SerializeField]
     private float _attackRadius;
 
-    private void Awake()
-    {
-        
-    }
+    
 
     private void Start()
     {
@@ -104,12 +104,12 @@ public class Jab : MonoBehaviour, IAttack
 
         foreach (Collider enemy in hitEnemiesR)
         {
-            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            EnemyStateMachine enemyState = enemy.GetComponent<EnemyStateMachine>();
             FinalBoss bossComponent = enemy.GetComponent<FinalBoss>();
 
-            if (enemyComponent != null)
+            if (enemyState != null)
             {
-                enemyComponent.TakeDamage(_playerData.Damage + 10);
+                enemyState.currentState = enemyState.damagedState;
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
             else if (bossComponent != null)
@@ -152,10 +152,6 @@ public class Jab : MonoBehaviour, IAttack
                 bossComponent.TakeDamage(_playerData.Damage + 10);
                 Debug.Log("The " + enemy.name + " was hit, dealing " + (_playerData.Damage + 10) + " of Damage.");
             }
-
-            
-            enemy.GetComponent<Enemy>().TakeDamage(_playerData.Damage + 10);
-            Debug.Log("The " + enemy.name + " was hit, dealing " + _playerData.Damage + " of Damage.");
 
         }
 

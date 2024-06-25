@@ -14,6 +14,8 @@ public class EnemyStateMachine : MonoBehaviour
     [Header("Data")]
     public EntityData _data;
 
+    public EntityData playerData;
+
     [Header("AI")]
     public Transform playerTransform;
     public Transform attackPoint;
@@ -24,7 +26,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public EnemyType enemyType;
 
-    BaseState currentState;
+    internal BaseState currentState;
 
     public EnemyIdleState idleState = new EnemyIdleState();
     public EnemyChaseState chaseState = new EnemyChaseState();

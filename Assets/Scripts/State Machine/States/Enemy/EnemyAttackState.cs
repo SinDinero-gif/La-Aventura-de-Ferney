@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class EnemyAttackState : BaseState
 {
+    float attackCoolDown = 0;
+
     public override void EnterState(EnemyStateMachine enemy)
     {
         enemy._data.CanAttack = true;
@@ -14,6 +16,17 @@ public class EnemyAttackState : BaseState
 
     public override void UpdateState(EnemyStateMachine enemy)
     {
+        attackCoolDown += Time.deltaTime;
+
+        if (attackCoolDown <= enemy._data.AttackSpeed)
+        {
+            enemy._data.CanAttack = false;
+        }
+        else
+        {
+            enemy._data.CanAttack = true;
+        }
+
         float distanceToPlayer = Vector3.Distance(enemy.transform.position, enemy.playerTransform.position);
 
         if (distanceToPlayer <= 1f && enemy._data.CanAttack)

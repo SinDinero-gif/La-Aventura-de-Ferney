@@ -13,6 +13,8 @@ public class EnemyChaseState : BaseState
 
     public override void UpdateState(EnemyStateMachine enemy)
     {
+        enemy.navMeshAgent.SetDestination(enemy.playerTransform.position);
+
         float distanceToPlayer = Vector3.Distance(enemy.transform.position, enemy.playerTransform.position);
 
         if (distanceToPlayer > enemy._data.ChaseRange) 

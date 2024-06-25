@@ -24,7 +24,7 @@ public class AudioSettings : MonoBehaviour
     {
         float volume = masterSlider.value;
         audioMixer.SetFloat("master", Mathf.Log10(volume)*20);
-        PlayerPrefs.SetFloat("masterVolume", volume);
+        PlayerPrefs.SetFloat("master Volume", volume);
     }
 
 
@@ -32,20 +32,20 @@ public class AudioSettings : MonoBehaviour
     {
         float volume = musicSlider.value;
         audioMixer.SetFloat("music", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("musicVolume", volume);
+        PlayerPrefs.SetFloat("music Volume", volume);
     }
 
     public void SetSfxVolume()
     {
         float volume = sfxSlider.value;
         audioMixer.SetFloat("sfx", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("sfxVolume", volume);
+        PlayerPrefs.SetFloat("sfx Volume", volume);
     }
 
     private void LoadVolume()
     {
-        masterSlider.value = PlayerPrefs.GetFloat("masterVolume");
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        masterSlider.value = PlayerPrefs.GetFloat("master Volume");
+        musicSlider.value = PlayerPrefs.GetFloat("music Volume");
+        sfxSlider.value = PlayerPrefs.GetFloat("sfx Volume");
     }
 }

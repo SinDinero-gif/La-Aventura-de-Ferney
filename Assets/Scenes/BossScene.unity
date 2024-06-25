@@ -1261,7 +1261,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3788,6 +3788,7 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 589a8f0f6908d7745a04724e2e6c5856, type: 2}
   attackPoint: {fileID: 7749293826198513878}
   _playerAnimator: {fileID: 455976794923913505}
+  _enemy: {fileID: 0}
   attackCounter: 0
   _attackRadius: 3
 --- !u!1 &7104230785438173648

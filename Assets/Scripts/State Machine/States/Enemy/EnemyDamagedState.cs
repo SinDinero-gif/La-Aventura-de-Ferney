@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class EnemyDamagedState : BaseState
 {
+
+
     public override void EnterState(EnemyStateMachine enemy)
     {
-        throw new System.NotImplementedException();
+        TakeDamage(enemy, enemy.playerData.Damage);
     }
 
     public override void UpdateState(EnemyStateMachine enemy)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public override void ExitState(EnemyStateMachine enemy)
     {
-        throw new System.NotImplementedException();
+        Debug.Log(enemy._data.Name + " deja de recibir daño");
+    }
+
+    private void TakeDamage(EnemyStateMachine enemy,int damage)
+    {
+        enemy.animator.SetTrigger("Damaged");
+        enemy._data.CurrentHealth -= damage;
     }
 }
